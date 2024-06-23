@@ -189,7 +189,7 @@ span{
     position: relative;
 } 
 .text-animation span::before{
-    content: "Web Developer";
+    content: "Freelancer";
     color: var(--main-color);
     animation: words 20s infinite;
 }
@@ -211,23 +211,23 @@ span{
 @keyframes words{
     0%,
     20%{
-    content: "Frontend Designer";
+    content: "Freelancer";
     }
     21%,
     40%{
-    content: "Web Designer";
+    content: "Front-End Web Developer";
     }
     41%,
     60%{
-    content: "UI / UX Designer";
+    content: "Freelance Data Entry Clerk";
     }
     61%,
     80%{
-    content: "Web Developer";
+    content: "Freelance Transcriber";
     }
     81%,
     100%{
-    content: "Software Tester";
+    content: "Student";
     }
 }
 @keyframes typing{
@@ -316,6 +316,16 @@ span{
     right: -8px;
     animation: cursor 0.6s infinite, typing 20s steps(14) infinite;
 }
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--main-color);
+}
+::-webkit-scrollbar-track{
+    background-color: var(--bg-color);
+    width: 10px;
+}
 
 /*Education Section*/
 
@@ -403,16 +413,6 @@ margin: -1px -1px 0px;
     margin-top: 30px;
     margin-left: -10px;
 }
-::-webkit-scrollbar{
-    width: 5px;
-}
-::-webkit-scrollbar-thumb{
-    background-color: var(--main-color);
-}
-::-webkit-scrollbar-track{
-    background-color: var(--bg-color);
-    width: 10px;
-}
 
 /*Service Section*/
 
@@ -448,8 +448,13 @@ margin: -1px -1px 0px;
     margin: 5rem;
     text-align: center;
 }
+.contact form .input-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 .contact form, .input-box input,
-.contact form .input-box textarea{
+.contact form textarea{
     width: 100%;
     padding: 2.5rem;
     font-size: 1.8rem;
@@ -460,21 +465,8 @@ margin: -1px -1px 0px;
     margin: 1.5rem 0;
     resize: none;
 }
-.contact form .input-box 
 .contact form .btn{
     margin-top: 10rem;
-}
-.contact form .input-group-2 .message{
-    width: 500px;
-    height: 300px;
-    padding: 2.5rem;
-    font-size: 1.8rem;
-    color: var(--text-color);
-    background: var(--bg-color);
-    border-radius: 2rem;
-    border: 2px solid var(--main-color);
-    margin: 1.5rem 0;
-    resize: none;
 }
 
  /*Footer*/
@@ -564,6 +556,7 @@ margin: -1px -1px 0px;
     }
     .contact form{
         flex-direction: column;
+        width: auto;
     }
     footer{
         padding: 1rem 1%;
@@ -622,17 +615,19 @@ margin: -1px -1px 0px;
         margin: 0rem 0;
     }
     .about{
-        flex-direction: column-reverse;
         padding: 6rem 8% 8rem;
     }
     .about .heading{
         margin: 2.6rem 0;
         font-size: 5rem;
     }
-    .about img{
-        width: 30vw;
-        margin-left: 65vw;
-        margin-top: -90vw;
+    .about-img img{
+        position: relative;
+        width: 30vW;
+        top: 1rem;
+    }
+    .about p{
+        margin-right: 30vw;
     }
     .services h2{
         margin-bottom: 3rem;
