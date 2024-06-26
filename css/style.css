@@ -267,10 +267,12 @@ span{
 }
 .about-img{
     border-radius: 50%;
+    display: grid;
+    place-items: center;
 }
 .about-img img{
     position: relative;
-    width: 32vW;
+    width: 30vW;
     border-radius: 50%;
     box-shadow: 0 0 25px var(--main-color);
     top: 1rem;
@@ -284,8 +286,7 @@ span{
 }
 .heading{
     text-align: center;
-    font-size: 6rem;
-    margin: 5rem 0;
+    font-size: 7rem;
 }
 .about-content h2{
     text-align: left;
@@ -295,7 +296,7 @@ span{
     font-size: 2.6rem;
 }
 .about-content p{
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 2rem 0 3rem;
 }
 .about .heading{
@@ -316,6 +317,9 @@ span{
     right: -8px;
     animation: cursor 0.6s infinite, typing 20s steps(14) infinite;
 }
+
+/*Scrollbar*/
+
 ::-webkit-scrollbar{
     width: 5px;
 }
@@ -557,9 +561,27 @@ margin: -1px -1px 0px;
     .contact form{
         flex-direction: column;
         width: auto;
+        margin-top: 10px;
     }
     footer{
         padding: 1rem 1%;
+    }
+    .timeline-items::before{
+        left: 7px;
+    }
+    .timeline-item:nth-child(odd){
+        padding-right: 0;
+        text-align: left;
+    }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even){
+        padding-left: 37px;
+    }
+    .timeline-dot{
+        left: 0;
+    }
+    .testimonials .wrapper{
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 @media(max-width: 895px){
@@ -614,22 +636,18 @@ margin: -1px -1px 0px;
     .home-img img{
         margin: 0rem 0;
     }
-    .about{
-        padding: 6rem 8% 8rem;
-        margin: 1rem 1rem;
-        flex-direction: column-reverse;
+    .about {
+        flex-direction: column;
+        text-align: center;
     }
-    .about .heading{
-        margin: 2rem 0;
-        font-size: 5rem;
+
+    .about-text {
+        margin-top: 2rem;
+        text-align: center;
     }
-    .about-img img{
-        position: relative;
-        width: 30vW;
-        top: 1rem;
-    }
-    .about p{
-        margin-right: 30vw;
+
+    .about-text p {
+        margin: 1rem auto;
     }
     .services h2{
         margin-bottom: 3rem;
