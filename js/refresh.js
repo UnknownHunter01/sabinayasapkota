@@ -6,6 +6,7 @@ function setCookie(name, value, days) {
         expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    console.log("Cookie set: " + name + "=" + value);
 }
 
 function getCookie(name) {
@@ -21,8 +22,12 @@ function getCookie(name) {
 
 function checkRefresh() {
     var refreshCookie = getCookie("hasRefreshed");
+    console.log("Check cookie: " + refreshCookie);
     if (!refreshCookie) {
         setCookie("hasRefreshed", "true", 1); // set cookie to expire in 1 day
+        console.log("Redirecting to new URL");
         window.location.replace("https://www.sabinayasapkota.com.np/#home");
+    } else {
+        console.log("No redirect needed, cookie found.");
     }
 }
