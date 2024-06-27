@@ -25,8 +25,8 @@ function checkRefresh() {
     console.log("Check cookie: " + refreshCookie);
     if (!refreshCookie) {
         setCookie("hasRefreshed", "true", 1); // set cookie to expire in 1 day
-        console.log("Redirecting to new URL");
-        window.location.replace("https://www.sabinayasapkota.com.np/#home");
+        console.log("Redirecting to new URL section");
+        window.location.hash = "#home"; // redirect to the #home section of the same site
     } else {
         console.log("No redirect needed, cookie found.");
     }
