@@ -1,3 +1,3 @@
 window.onload = function() {
-    window.location.href = "#home";
+    window.location.hash = "#home";
 };
