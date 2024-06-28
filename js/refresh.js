@@ -1,3 +1,14 @@
 window.onload = function() {
-    window.location.hash = "#home";
+    // Check if the URL contains the query parameter `redirected=true`
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirected = urlParams.get('redirected');
+
+    if (redirected) {
+        // Remove the query parameter
+        const newUrl = window.location.origin + window.location.pathname + '#home';
+        window.history.replaceState({}, '', newUrl);
+
+        // Scroll to the home section
+        document.getElementById('home').scrollIntoView();
+    }
 };
