@@ -549,6 +549,14 @@ margin: -1px -1px 0px;
         width: auto;
         margin-top: 10px;
     }
+    .toast {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
     .timeline-items::before{
         left: 7px;
     }
