@@ -144,23 +144,26 @@
 
         <section class="contact" id="contact">
             <h2 class="heading">Contact <span>Me</span></h2>
-
-            <form method="post" action="" name="contact_form">
+        
+            <form method="post" action="#" name="contact_form" id="contact_form">
                 <div class="input-group">
                     <div class="input-box">
                         <input type="text" name="Name" placeholder="Full Name" required>
                         <input type="email" name="Email" placeholder="Email" required>
-                        <input type="number" name="Number" placeholder="Phone Number" required>
+                        <input type="tel" name="Number" placeholder="Phone Number" required>
                         <input type="text" name="Subject" placeholder="Subject" required>
                     </div>
                 </div>
-
+        
                 <div class="input-group-2">
-                    <textarea name="Message" class="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                    <textarea name="Message" class="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
                     <input type="submit" value="Send Message" id="submit" class="btn">
                 </div>
             </form>
         </section>
+        
+        <div id="toast-container"></div>
+        
         <footer class="footer">
             <div class="social-icons">
                 <a href="https://www.facebook.com/sabinaya.sapkota.01/" target="_blank">
