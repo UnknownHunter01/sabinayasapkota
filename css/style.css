@@ -419,10 +419,11 @@ margin: -1px -1px 0px;
     margin-top: 10rem;
 }
 #toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: relative;
+    top: 0px;
+    right: 0px;
     z-index: 1000;
+    bottom: 10px;
 }
 
 .toast {
