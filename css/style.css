@@ -266,6 +266,49 @@ span{
 .skill{
     background-color: var(--second-bg-color);
 }
+#skill {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.skill .heading{
+    margin-top: 5vh;
+}
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.skill-item {
+    background-color: var(--second-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+}
+
+.skill-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.skill-item p {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--second-bg-color);
+}
+.skill-item:hover {
+    background-color: var(--second-bg-color);
+    transform: translateY(-10px);
+}
 
 /*Scrollbar*/
 
@@ -286,9 +329,13 @@ span{
     padding: 30px 15px;
     background-color: var(--bg-color);
 }
+.education .heading{
+    margin-top: 10vh;
+}
 .education h2{
     margin-bottom: 1rem;
     font-size: 40px;
+    
 }
 .timeline-items{
     max-width: 1200px;
@@ -372,6 +419,48 @@ margin: -1px -1px 0px;
 .services{
     background: var(--second-bg-color);
     color: var(--text-color);
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-item {
+    background-color: #e14c30;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.service-item:hover {
+    background-color: #ff6347;
+    transform: translateY(-10px);
+}
+
+.service-item h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.service-item p {
+    margin: 10px 0 0;
+    font-size: 1em;
 }
 
 /*Projects*/
