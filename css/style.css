@@ -582,6 +582,67 @@ margin: -1px -1px 0px;
     .testimonials .wrapper{
         grid-template-columns: repeat(1, 1fr);
     }
+    #menu-icon{
+        display: block;
+    }
+    .navbar{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 50%;
+        padding: 1rem 3%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom-left-radius: 2rem;
+        border-left: 2px solid var(--main-color);
+        border-bottom: 2px solid var(--main-color);
+        display: none;
+    }
+    .navbar.active{
+        display: block;
+    }
+    .navbar a{
+        display: block;
+        font-size: 2rem;
+        margin: 2rem 0;
+        color: white;
+    }
+    .home{
+        flex-direction: column-reverse;
+        margin: 1rem 1rem;
+        gap: 0rem;
+    }
+    .home-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .home-content h3{
+        font-size: 2.4rem;
+        margin: 0 0;
+    }
+    .home-content h1{
+        font-size: 4rem;
+        margin-top: 0rem;
+    }
+    .home-content p{
+        max-width: 800px;
+        margin: 0 -4%;
+    }
+    .home-img img{
+        margin: 5rem 0;
+    }
+    .services h2{
+        margin-bottom: 3rem;
+    }
+    .services-container{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .projects-box{
+        grid-template-columns: repeat(1,1fr);
+    }
 }
 @media(max-width: 895px){
     #menu-icon{
@@ -654,5 +715,66 @@ margin: -1px -1px 0px;
 
     .footer .social-icons a {
         margin: 4px;
+    }
+    #menu-icon{
+        display: block;
+    }
+    .navbar{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 50%;
+        padding: 1rem 3%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom-left-radius: 2rem;
+        border-left: 2px solid var(--main-color);
+        border-bottom: 2px solid var(--main-color);
+        display: none;
+    }
+    .navbar.active{
+        display: block;
+    }
+    .navbar a{
+        display: block;
+        font-size: 2rem;
+        margin: 2rem 0;
+        color: white;
+    }
+    .home{
+        flex-direction: column-reverse;
+        margin: 1rem 1rem;
+        gap: 0rem;
+    }
+    .home-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .home-content h3{
+        font-size: 2.4rem;
+        margin: 0 0;
+    }
+    .home-content h1{
+        font-size: 4rem;
+        margin-top: 0rem;
+    }
+    .home-content p{
+        max-width: 800px;
+        margin: 0 -4%;
+    }
+    .home-img img{
+        margin: 5rem 0;
+    }
+    .services h2{
+        margin-bottom: 3rem;
+    }
+    .services-container{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .projects-box{
+        grid-template-columns: repeat(1,1fr);
     }
 }
