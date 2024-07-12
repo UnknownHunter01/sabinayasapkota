@@ -1,7 +1,8 @@
 {
     "name": "Sabinaya Sapkota",
-    "short_name": "App",
-    "start_url": "/",
+    "short_name": "Sabinaya",
+    "start_url": "/index.html",
+    "scope":"/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
