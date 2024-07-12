@@ -292,6 +292,7 @@ span{
     padding: 20px;
     width: 150px;
     text-align: center;
+    border: 3px solid var(--main-color);
 }
 
 .skill-item img {
@@ -307,7 +308,8 @@ span{
 }
 .skill-item:hover {
     background-color: var(--second-bg-color);
-    transform: translateY(-10px);
+    box-shadow: 0 0 25px var(--main-color);
+    transform: scale(1.05);
 }
 
 /*Scrollbar*/
@@ -440,8 +442,9 @@ h2 {
 }
 
 .service-item {
-    background-color: #e14c30;
+    background-color: var(--second-bg-color);
     border-radius: 10px;
+    border: 3px solid var(--main-color);
     padding: 20px;
     width: 300px;
     text-align: center;
@@ -449,8 +452,9 @@ h2 {
 }
 
 .service-item:hover {
-    background-color: #ff6347;
-    transform: translateY(-10px);
+    background-color: var(--second-bg-color);
+    box-shadow: 0 0 25px var(--main-color);
+    transform: scale(1.05);
 }
 
 .service-item h3 {
