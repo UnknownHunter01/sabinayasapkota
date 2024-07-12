@@ -263,6 +263,13 @@ span{
 }
 
 /*Skills Section*/
+.skill{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15rem;
+    background-color: var(--second-bg-color);
+}
 
 /*Scrollbar*/
 
@@ -599,13 +606,13 @@ margin: -1px -1px 0px;
     .navbar a{
         display: block;
         font-size: 2rem;
-        margin: 3rem 0;
+        margin: 2rem 0;
         color: white;
     }
     .home{
         flex-direction: column-reverse;
         margin: 1rem 1rem;
-        gap: 3rem;
+        gap: 0rem;
     }
     .home-content{
         display: flex;
@@ -623,10 +630,10 @@ margin: -1px -1px 0px;
     }
     .home-content p{
         max-width: 800px;
-        margin: 0 auto;
+        margin: 0 -4%;
     }
     .home-img img{
-        margin: 0rem 0;
+        margin: 5rem 0;
     }
     .services h2{
         margin-bottom: 3rem;
