@@ -10,7 +10,7 @@
 }
 :root{
     --bg-color: #080808;
-    --second-bg-color: #1b0000;
+    --second-bg-color: #ff0c0c17;
     --text-color: white;
     --main-color: #f60b0b;
 }
@@ -264,10 +264,6 @@ span{
 
 /*Skills Section*/
 .skill{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15rem;
     background-color: var(--second-bg-color);
 }
 
