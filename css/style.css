@@ -484,6 +484,9 @@ h2 {
 .testimonials .heading{
     margin-top: 7vh;
 }
+.testimonials{
+    background-color: var(--second-bg-color);
+}
 
 /*Contact Section*/
 
