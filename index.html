@@ -24,6 +24,7 @@
         <meta property="og:url" content="https://www.sabinayasapkota.com.np">
 
         <link rel="manifest" href="json/manifest.json">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
     <body>
         <script src="js/feed-scroll.js"></script>
@@ -46,7 +47,7 @@
         </header>
 
         <section class="home" id="home">
-            <div class="home-content">
+            <div class="home-content" data-aos="fade-right">
                 <h1><span>Hello!</span>,<br>
                      It's <span>Sabinaya</span></h1>
                 <h3 class="text-animation">
@@ -121,7 +122,7 @@
                 </div>
             </div>
         </section>
-
+        <div data-aos="fade-up">
         <section class="education" id="education">
             <h2 class="heading">Education</h2>
 
@@ -181,6 +182,7 @@
 
             </div>
         </section>
+    </div>
 
         <section class="services" id="services">
             <h2 class="heading">Services</h2>
@@ -279,5 +281,7 @@
         <script src="js/script.js"></script>
         <script src="js/app.js"></script>
         <script src="service-worker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="js/AOS.js"></script>
     </body>
 </html>
