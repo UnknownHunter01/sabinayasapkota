@@ -327,6 +327,11 @@ span{
 
 /*Education Section*/
 
+.timeline-icon {
+    font-size: 12px;
+    position: relative;
+    margin: 4px 10px -8px 3px;
+}
 .education{
     padding: 30px 15px;
     background-color: var(--bg-color);
@@ -633,6 +638,11 @@ h2 {
         grid-template-columns: repeat(1, 1fr);
         margin: 0 5rem;
     }
+    .timeline-icon {
+        font-size: 12px;
+        position: absolute;
+        margin: 4px -5px -8px 3px;
+    }
     .projects-box{
         grid-template-columns: repeat(2, 1fr);
     }
@@ -872,6 +882,11 @@ h2 {
     .projects-box{
         grid-template-columns: repeat(1,1fr);
     }
+    .timeline-icon {
+        font-size: 12px;
+        position: absolute;
+        margin: 4px -5px -8px 3px;
+    }
 }
 @media(max-width: 991px){
     html{
@@ -881,6 +896,11 @@ h2 {
         padding-bottom: 7rem;
         grid-template-columns: repeat(1, 1fr);
         margin: 0 5rem;
+    }
+    .timeline-icon {
+        font-size: 12px;
+        position: absolute;
+        margin: 4px -5px -8px 3px;
     }
     .projects-box{
         grid-template-columns: repeat(2, 1fr);
@@ -998,6 +1018,11 @@ h2 {
         padding-bottom: 7rem;
         grid-template-columns: repeat(1, 1fr);
         margin: 0 5rem;
+    }
+    .timeline-icon {
+        font-size: 12px;
+        position: absolute;
+        margin: 4px -5px -8px 3px;
     }
     .projects-box{
         grid-template-columns: repeat(2, 1fr);
@@ -1180,6 +1205,11 @@ h2 {
     }
     .projects-box{
         grid-template-columns: repeat(2, 1fr);
+    }
+    .timeline-icon {
+        font-size: 12px;
+        position: absolute;
+        margin: 4px -5px -8px 3px;
     }
     .project-box img{
         min-width: 30vw;
