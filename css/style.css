@@ -429,7 +429,7 @@ margin: -1px -1px 0px;
     color: var(--text-color);
 }
 .services .heading{
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 .container {
     max-width: 1200px;
@@ -1298,5 +1298,8 @@ h2 {
         flex-direction: column;
         width: auto;
         margin-top: 6px;
+    }
+    .services .heading{
+        margin-top: 10vh;
     }
 }
