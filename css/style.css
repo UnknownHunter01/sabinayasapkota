@@ -304,7 +304,8 @@ span{
 .skill-item p {
     margin: 0;
     font-size: 1.2em;
-    color: var(--second-bg-color);
+    color: var(--text-color);
+    font-size: medium;
 }
 .skill-item:hover {
     background-color: var(--second-bg-color);
