@@ -441,6 +441,7 @@ h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
     color: #fff;
+    margin-top: 10px;
 }
 
 .services-grid {
@@ -458,6 +459,7 @@ h2 {
     width: 300px;
     text-align: center;
     transition: background-color 0.3s, transform 0.3s;
+    font-size: 15px;
 }
 
 .service-item:hover {
