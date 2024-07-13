@@ -484,50 +484,6 @@ h2 {
 .testimonials .heading{
     margin-top: 7vh;
 }
-.feed{
-    width: 100%;
-    padding: 2.5rem;
-    font-size: 1.8rem;
-    margin: 1vh 0;
-    resize: none;
-    overflow: hidden;
-}
-.testimonials{
-    background-color: var(--second-bg-color);
-    overflow: hidden;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.feedback-container {
-    display: flex;
-    animation: scroll-left 20s linear infinite;
-    padding: 20px;
-}
-
-.feedback-card {
-    flex: 0 0 33.33%;
-    min-width: 200px;
-    margin: 0 10px;
-    padding: 20px;
-    background-color: var(--bg-color);
-    border: 3px solid var(--main-color);
-    color: #fff;
-    font-size: large;
-    border-radius: 5px;
-    box-shadow: 0 0 25px var(--main-color);
-    text-align: center;
-}
-
-@keyframes scroll-left {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
 
 /*Contact Section*/
 
@@ -1336,8 +1292,5 @@ h2 {
         flex-direction: column;
         width: auto;
         margin-top: 6px;
-    }
-    .testimonials .heading{
-        margin-top: 8vh;
     }
 }
