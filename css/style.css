@@ -14,6 +14,19 @@
     --text-color: white;
     --main-color: #f60b0b;
 }
+/* Prevent horizontal overflow */
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply box-sizing globally */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 html{
     font-size: 50%;
     overflow:-moz-hidden-unscrollable;
