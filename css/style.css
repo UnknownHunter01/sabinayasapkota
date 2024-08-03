@@ -330,10 +330,12 @@ body {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
+        overflow: hidden;
     }
 
     .skill-item {
         width: auto; /* Let the grid control the width */
+        overflow: hidden;
     }
 }
 
