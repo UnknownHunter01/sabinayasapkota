@@ -314,6 +314,27 @@ body {
     box-shadow: 0 0 25px var(--main-color);
     transform: scale(1.05);
 }
+@media (max-width: 768px) {
+    .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .skill-item {
+        width: auto; /* Let the grid control the width */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .skills-grid {
+        justify-content: space-around;
+    }
+
+    .skill-item {
+        width: 45%;
+    }
+}
 
 /*Scrollbar*/
 
