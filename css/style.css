@@ -256,7 +256,9 @@ span{
 }
 
 /*Heading*/
-
+body {
+    overflow-x: hidden;
+}
 .heading{
     text-align: center;
     font-size: 7rem;
