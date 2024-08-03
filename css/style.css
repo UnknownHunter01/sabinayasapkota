@@ -641,6 +641,9 @@ h2 {
     html{
         font-size: 55%;
     }
+    body {
+        overflow-x: hidden;
+    }
     .services-container{
         padding-bottom: 7rem;
         grid-template-columns: repeat(1, 1fr);
@@ -900,6 +903,9 @@ h2 {
     html{
         font-size: 55%;
     }
+    body {
+        overflow-x: hidden;
+    }
     .services-container{
         padding-bottom: 7rem;
         grid-template-columns: repeat(1, 1fr);
@@ -1021,6 +1027,9 @@ h2 {
 @media(max-width: 895px){
     html{
         font-size: 55%;
+    }
+    body {
+        overflow-x: hidden;
     }
     .services-container{
         padding-bottom: 7rem;
@@ -1206,6 +1215,9 @@ h2 {
 @media (max-width: 768px) {
     html{
         font-size: 55%;
+    }
+    body {
+        overflow-x: hidden;
     }
     .services-container{
         padding-bottom: 7rem;
