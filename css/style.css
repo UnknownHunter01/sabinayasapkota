@@ -17,8 +17,6 @@
 /* Prevent horizontal overflow */
 html, body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
 }
 
 /* Apply box-sizing globally */
