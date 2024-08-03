@@ -335,7 +335,6 @@ body {
 
     .skill-item {
         width: auto; /* Let the grid control the width */
-        overflow: hidden;
     }
 }
 
@@ -1353,5 +1352,4 @@ h2 {
 }
 header, footer, main, section, div {
     max-width: 100%;
-    overflow-x: hidden;
 }
