@@ -25,29 +25,4 @@ function updateSlider() {
 }
 
 
-// Create the full-screen overlay element
-const overlay = document.createElement('div');
-overlay.classList.add('fullscreen-overlay');
-document.body.appendChild(overlay);
-
-// Add an image element to the overlay
-const overlayImage = document.createElement('img');
-overlay.appendChild(overlayImage);
-
-// Function to open the image in full screen
-function openFullScreen(src) {
-    overlayImage.src = src;
-    overlay.style.display = 'flex';
-}
-
-// Add event listeners to each certificate image
-document.querySelectorAll('.certificate-item img').forEach(img => {
-    img.addEventListener('click', () => openFullScreen(img.src));
-});
-
-// Close the overlay when clicked
-overlay.addEventListener('click', () => {
-    overlay.style.display = 'none';
-});
-
 
