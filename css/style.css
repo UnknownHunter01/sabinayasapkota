@@ -688,7 +688,7 @@ h2 {
     position: relative;
     top: 0px;
     right: 0px;
-    z-index: 1000;
+    z-index: 10px;
     bottom: 10px;
 }
 
