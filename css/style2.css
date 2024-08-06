@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: "Poppins",sans-serif;
+}
+:root{
+    --bg-color: #080808;
+    --second-bg-color: #ff0c0c17;
+    --text-color: white;
+    --main-color: #f60b0b;
+}
+/* Prevent horizontal overflow */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Apply box-sizing globally */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html{
+    font-size: 50%;
+    overflow:-moz-hidden-unscrollable;
+}
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+.header{
+    position:fixed;
+    top: 0;
+    left: 0;
+    padding: 3rem 12% 2rem;
+    background:  rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    width: 100%;
+}
+.logo{
+    font-size: 3rem;
+    color: var(--text-color);
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.logo:hover{
+    transform: scale(1.1);
+}
+.logo span{
+    text-shadow: 0 0 25px var(--main-color);
+    color: var(--main-color);
+}
