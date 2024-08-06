@@ -372,7 +372,6 @@ body {
     box-sizing: border-box;
     padding: 20px;
 }
-
 #prevBtn, #nextBtn {
     position: absolute;
     top: 50%;
@@ -392,6 +391,23 @@ body {
 
 #nextBtn {
     right: 20px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    #prevBtn, #nextBtn {
+        top: auto;  /* Override the top positioning */
+        bottom: 20px;  /* Position at the bottom */
+        transform: none;  /* Remove vertical centering */
+    }
+
+    #prevBtn {
+        left: 20px;
+    }
+
+    #nextBtn {
+        right: 20px;
+    }
 }
 
 /* Styles for certificates (if they follow the same layout as skills) */
