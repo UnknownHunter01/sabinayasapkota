@@ -49,3 +49,5 @@ document.querySelectorAll('.certificate-item img').forEach(img => {
 overlay.addEventListener('click', () => {
     overlay.style.display = 'none';
 });
+
+
