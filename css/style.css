@@ -276,9 +276,11 @@ body {
 }
 
 /*Skills Section*/
-.skill{
+/* Original styles for skills */
+.skill {
     background-color: var(--second-bg-color);
 }
+
 #skill {
     text-align: center;
     padding: 50px 0;
@@ -289,9 +291,11 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
-.skill .heading{
+
+.skill .heading {
     margin-top: 5vh;
 }
+
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
@@ -320,11 +324,13 @@ body {
     color: var(--text-color);
     font-size: medium;
 }
+
 .skill-item:hover {
     background-color: var(--second-bg-color);
     box-shadow: 0 0 25px var(--main-color);
     transform: scale(1.05);
 }
+
 @media (max-width: 768px) {
     .skills-grid {
         display: grid;
@@ -346,6 +352,82 @@ body {
     .skill-item {
         width: 45%;
     }
+}
+
+/* Styles for the slider */
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 50px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+#prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#prevBtn {
+    left: 20px;
+}
+
+#nextBtn {
+    right: 20px;
+}
+
+/* Styles for certificates (if they follow the same layout as skills) */
+.certificates-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.certificate-item {
+    background-color: var(--second-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    border: 3px solid var(--main-color);
+}
+
+.certificate-item img {
+    width: 150px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.certificate-item p {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--text-color);
+    font-size: medium;
+}
+
+.certificate-item:hover {
+    background-color: var(--second-bg-color);
+    box-shadow: 0 0 25px var(--main-color);
+    
 }
 
 /*Scrollbar*/
