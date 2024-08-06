@@ -26,30 +26,28 @@ function updateSlider() {
 
 
 
-// Get the modal
-var modal = document.getElementById('modal');
 
-// Get the image and insert it inside the modal
-var modalImg = document.getElementById("modal-img");
+// Create the full-screen overlay element
+const overlay = document.createElement('div');
+overlay.classList.add('fullscreen-overlay');
+document.body.appendChild(overlay);
 
-document.querySelectorAll('.cert-img').forEach(item => {
-    item.addEventListener('click', event => {
-        modal.style.display = "block";
-        modalImg.src = event.target.src;
-    });
+// Add an image element to the overlay
+const overlayImage = document.createElement('img');
+overlay.appendChild(overlayImage);
+
+// Function to open the image in full screen
+function openFullScreen(src) {
+    overlayImage.src = src;
+    overlay.style.display = 'flex';
+}
+
+// Add event listeners to each certificate image
+document.querySelectorAll('.certificate-item img').forEach(img => {
+    img.addEventListener('click', () => openFullScreen(img.src));
 });
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
-    modal.style.display = "none";
-}
-
-// Close modal when clicking outside of the image
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// Close the overlay when clicked
+overlay.addEventListener('click', () => {
+    overlay.style.display = 'none';
+});
