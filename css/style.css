@@ -642,6 +642,91 @@ h2 {
 .testimonials{
     background-color: var(--second-bg-color);
 }
+.testimonials-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    border: 3px solid var(--main-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+    opacity: 0.5;
+    transform: scale(0.8);
+}
+.tot{
+    font-size: 3.2rem;
+    text-align: center;
+}
+.testimonial-card.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.testimonial-card p {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 10px;
+    bottom: 10px;
+}
+
+.testimonial-card h4 {
+    font-size: 2rem;
+    color: var(--main-color);
+    margin-bottom: 5px;
+}
+
+.testimonial-card span {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        width: 80%;
+        margin: 0 5px;
+    }
+}
 
 
 /*Contact Section*/
@@ -1049,6 +1134,9 @@ h2 {
         position: absolute;
         margin: 4px -5px -8px 3px;
     }
+    .testimonials .heading{
+        margin-top: 10vh;
+    }
 }
 @media(max-width: 991px){
     html{
@@ -1173,6 +1261,9 @@ h2 {
     }
     .projects-box{
         grid-template-columns: repeat(1,1fr);
+    }
+    .testimonials .heading{
+        margin-top: 10vh;
     }
 }
 @media(max-width: 895px){
@@ -1362,6 +1453,9 @@ h2 {
     .projects-box{
         grid-template-columns: repeat(1,1fr);
     }
+    .testimonials .heading{
+        margin-top: 10vh;
+    }
 }
 @media (max-width: 768px) {
     html{
@@ -1465,6 +1559,9 @@ h2 {
         margin-top: 6px;
     }
     .services .heading{
+        margin-top: 10vh;
+    }
+    .testimonials .heading{
         margin-top: 10vh;
     }
 }
