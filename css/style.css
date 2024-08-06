@@ -706,6 +706,8 @@ h2 {
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 3px solid var(--main-color);    
     color: #fff;
     border: none;
     padding: 10px;
@@ -715,10 +717,14 @@ h2 {
 
 .left-arrow {
     left: 10px;
+    border-radius: 10px;
+    border: 3px solid var(--main-color);
 }
 
 .right-arrow {
     right: 10px;
+    border-radius: 10px;
+    border: 3px solid var(--main-color);
 }
 
 @media (max-width: 768px) {
