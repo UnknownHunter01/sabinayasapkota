@@ -54,6 +54,7 @@ body {
 .header .btn{
     background-color: var(--main-color);
     color: white;
+    font-size: 15px;
 }
 .btn{
     display: inline-block;
@@ -106,15 +107,18 @@ body {
     text-shadow: 0 0 25px var(--main-color);
     color: var(--main-color);
 }
-
+.heading span {
+    text-shadow: 0 0 25px var(--main-color);
+    color: var(--main-color);
+}
 .downloads {
-    padding: 50px 0;
+    padding: 100px 0;
     text-align: center;
-    background-color: var(--second-bg-color);
 }
 
 .heading {
-    font-size: 2em;
+    text-align: center;
+    font-size: 3.5rem;
     margin-bottom: 20px;
 }
 
@@ -127,7 +131,7 @@ body {
 }
 
 .download-card {
-    background-color: #fff;
+    background-color: var(--bg-color);
     border-radius: 10px;
     padding: 20px;
     width: 200px;
@@ -159,4 +163,23 @@ body {
 
 .download-btn:hover {
     background-color: #e60000;
+}
+@media (max-width: 768px) {
+    .header {
+        padding: 2rem 5%;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    .downloads-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .download-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
 }
