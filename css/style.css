@@ -278,7 +278,7 @@ body {
 /*Skills Section*/
 /* Original styles for skills */
 .skill {
-    background-color: var(--bg-color);
+    background-color: var(--second-bg-color);
 }
 
 #skill {
