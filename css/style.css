@@ -176,6 +176,7 @@ span{
     box-shadow: 0 0 50px var(--main-color);
 }
 .btn-group{
+    padding-top: 10px;
     display: flex;
     align-items: center;
     gap: 1.5rem;
