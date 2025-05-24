@@ -56,36 +56,35 @@ overlay.addEventListener('click', () => {
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const leftArrow = document.querySelector('.left-arrow');
+    const rightArrow = document.querySelector('.right-arrow');
+    let currentTestimonial = 0;
+    const visibleCards = 3;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.testimonial-card');
-    let currentIndex = 0;
-
-    function showCard(index) {
-        cards.forEach((card, i) => {
-            card.classList.remove('active');
+    function showTestimonials(startIndex) {
+        testimonialCards.forEach((card, i) => {
             card.style.display = 'none';
         });
-        cards[index].classList.add('active');
-        cards[index].style.display = 'block';
+
+        for (let i = 0; i < visibleCards; i++) {
+            const idx = (startIndex + i) % testimonialCards.length;
+            testimonialCards[idx].style.display = 'flex';
+        }
     }
 
-    function nextCard() {
-        currentIndex = (currentIndex + 1) % cards.length;
-        showCard(currentIndex);
+    if (testimonialCards.length > 0) {
+        showTestimonials(currentTestimonial);
+
+        leftArrow.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
+            showTestimonials(currentTestimonial);
+        });
+
+        rightArrow.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonials(currentTestimonial);
+        });
     }
-
-    function prevCard() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        showCard(currentIndex);
-    }
-
-    document.querySelector('.right-arrow').addEventListener('click', nextCard);
-    document.querySelector('.left-arrow').addEventListener('click', prevCard);
-
-    // Auto-scroll
-    setInterval(nextCard, 3000);
-
-    // Initialize the first card
-    showCard(currentIndex);
 });
