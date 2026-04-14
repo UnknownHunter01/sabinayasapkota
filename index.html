@@ -35,7 +35,7 @@
           gtag('config', 'G-VFMDC873GN');
         </script>
     </head>
-    <body>
+    <body onclick="playMusic()">
         <script>
             // Set the zoom level to 100%
             document.body.style.zoom = "100%"; 
@@ -372,9 +372,18 @@
             <p class="copyright">
                 © Sabinaya Sapkota | All Rights Reserved
             </p>
+            <audio id="bg-music" loop>
+        <source src="file/No Thing.mp3" type="audio/mpeg">
+    </audio>
         </footer>
         <script src="js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="js/AOS.js"></script>
+        <script>
+        function playMusic() {
+            const music = document.getElementById("bg-music");
+            music.play();
+        }
+    </script>
     </body>
 </html>
