@@ -222,24 +222,28 @@ span{
 }
 @keyframes words{
     0%,
-    20%{
-    content: "Freelancer";
+    16%{
+        content: "Freelancer";
     }
-    21%,
-    40%{
-    content: "Front-End Web Developer";
+    17%,
+    32%{
+        content: "Front-End Web Developer";
     }
-    41%,
-    60%{
-    content: "Freelance Data Entry Clerk";
+    33%,
+    48%{
+        content: "Freelance Data Entry Clerk";
     }
-    61%,
+    49%,
+    64%{
+        content: "Freelance Transcriber";
+    }
+    65%,
     80%{
-    content: "Freelance Transcriber";
+        content: "Bartender";
     }
     81%,
     100%{
-    content: "Student";
+        content: "Student";
     }
 }
 @keyframes typing{
