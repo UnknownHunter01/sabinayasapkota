@@ -380,9 +380,21 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="js/AOS.js"></script>
         <script>
-        function playMusic() {
-            const music = document.getElementById("bg-music");
-            music.play();
+         function playMusic() {
+    const music = document.getElementById("bg-music");
+    music.volume = 0;
+    music.play();
+
+    let vol = 0;
+    const fade = setInterval(() => {
+        if (vol < 0.3) {
+            vol += 0.01;
+            music.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+    }, 100);
+}
         }
     </script>
     </body>
