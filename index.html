@@ -379,31 +379,39 @@
         <script src="js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="js/AOS.js"></script>
-        <script>
+       <script>
 let hasPlayed = false;
 
 function playMusic() {
-    if (hasPlayed) return; // 🛑 stop if already played
-
-    hasPlayed = true;
-
     const music = document.getElementById("bg-music");
-    music.volume = 0;
 
-    music.play().catch(() => {
-        console.log("Autoplay blocked");
-    });
+    // 🔥 If already playing, do NOTHING (seamless)
+    if (!music.paused) return;
 
-    let vol = 0;
-    const fade = setInterval(() => {
-        if (vol < 0.3) {
-            vol += 0.01;
-            music.volume = vol;
-        } else {
-            clearInterval(fade);
-        }
-    }, 100);
+    // First time setup
+    if (!hasPlayed) {
+        hasPlayed = true;
+        music.volume = 0;
+
+        music.play().catch(() => {
+            console.log("Autoplay blocked");
+        });
+
+        let vol = 0;
+        const fade = setInterval(() => {
+            if (vol < 0.3) {
+                vol += 0.01;
+                music.volume = vol;
+            } else {
+                clearInterval(fade);
+            }
+        }, 100);
+
+    } else {
+        // 🔥 Resume without reset (seamless)
+        music.play();
+    }
 }
-    </script>
+</script>
     </body>
 </html>
