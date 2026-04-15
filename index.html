@@ -380,10 +380,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="js/AOS.js"></script>
         <script>
-         function playMusic() {
+function playMusic() {
     const music = document.getElementById("bg-music");
     music.volume = 0;
-    music.play();
+
+    music.play().catch(() => {
+        console.log("Autoplay blocked");
+    });
 
     let vol = 0;
     const fade = setInterval(() => {
@@ -395,7 +398,6 @@
         }
     }, 100);
 }
-        }
     </script>
     </body>
 </html>
