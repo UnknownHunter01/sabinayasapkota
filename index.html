@@ -380,7 +380,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="js/AOS.js"></script>
         <script>
+let hasPlayed = false;
+
 function playMusic() {
+    if (hasPlayed) return; // 🛑 stop if already played
+
+    hasPlayed = true;
+
     const music = document.getElementById("bg-music");
     music.volume = 0;
 
