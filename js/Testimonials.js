@@ -1,4 +1,4 @@
-  (() => {
+(() => {
   const carousel = document.querySelector(".testimonials-carousel");
   if (!carousel) return;
 
@@ -31,6 +31,9 @@
   let autoplayTimer = null;
   let isPaused = false;
 
+  // prevent rapid clicks / overlapping transitions
+  let isTransitioning = false;
+
   const step = () => {
     const slides = Array.from(track.children);
     const first = slides[0];
@@ -50,11 +53,17 @@
 
   const buildClones = () => {
     perView = getCardsPerView();
-    clones = perView;
+    clones = Math.min(perView, originalSlides.length); // safety for small counts
 
     clearClones();
 
     const slidesNow = Array.from(track.children); // originals only
+
+    if (slidesNow.length <= clones) {
+      // Not enough slides to meaningfully clone; still position safely
+      index = 0;
+      return;
+    }
 
     // Clone last N to the front
     const tail = slidesNow.slice(-clones).map((n) => n.cloneNode(true));
@@ -81,6 +90,7 @@
 
   const activeDotIndex = () => {
     // Map current "index" (track space) back to ORIGINAL page space
+    if (originalSlides.length === 0) return 0;
     const i = (index - clones) % originalSlides.length;
     const normalized = (i + originalSlides.length) % originalSlides.length;
     return Math.min(normalized, pageCount() - 1);
@@ -123,16 +133,19 @@
   };
 
   const update = (animate = true) => {
+    if (animate) isTransitioning = true;
     translateToIndex(animate);
     setDots();
   };
 
   const goNext = () => {
+    if (isTransitioning) return;
     index += 1;
     update(true);
   };
 
   const goPrev = () => {
+    if (isTransitioning) return;
     index -= 1;
     update(true);
   };
@@ -141,11 +154,18 @@
   track.addEventListener("transitionend", () => {
     const totalOriginal = originalSlides.length;
 
+    // if no clones were made, just unlock
+    if (clones === 0) {
+      isTransitioning = false;
+      return;
+    }
+
     // Left clone region: index < clones
     if (index < clones) {
       // Snap to the equivalent original near the end
       index = clones + (totalOriginal - 1);
       update(false);
+      isTransitioning = false;
       return;
     }
 
@@ -154,8 +174,11 @@
       // Snap back to start original
       index = clones;
       update(false);
+      isTransitioning = false;
       return;
     }
+
+    isTransitioning = false;
   });
 
   // ----- Autoplay (auto scroll) -----
@@ -200,6 +223,7 @@
   });
 
   const init = () => {
+    isTransitioning = false;
     buildClones();
     renderDots();
     update(false); // initial position without animation
