@@ -56,35 +56,3 @@ overlay.addEventListener('click', () => {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    const leftArrow = document.querySelector('.left-arrow');
-    const rightArrow = document.querySelector('.right-arrow');
-    let currentTestimonial = 0;
-    const visibleCards = 3;
-
-    function showTestimonials(startIndex) {
-        testimonialCards.forEach((card, i) => {
-            card.style.display = 'none';
-        });
-
-        for (let i = 0; i < visibleCards; i++) {
-            const idx = (startIndex + i) % testimonialCards.length;
-            testimonialCards[idx].style.display = 'flex';
-        }
-    }
-
-    if (testimonialCards.length > 0) {
-        showTestimonials(currentTestimonial);
-
-        leftArrow.addEventListener('click', () => {
-            currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
-            showTestimonials(currentTestimonial);
-        });
-
-        rightArrow.addEventListener('click', () => {
-            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-            showTestimonials(currentTestimonial);
-        });
-    }
-});
