@@ -1,17 +1,28 @@
 (() => {
-  const carousel = document.querySelector(".testimonials-carousel");
-  if (!carousel) return;
+  const LOG_PREFIX = "[Testimonials]";
+  const warn = (msg) => console.warn(`${LOG_PREFIX} ${msg}`);
 
-  const track = carousel.querySelector(".testimonials-track");
-  const prevBtn = carousel.querySelector(".left-arrow");
-  const nextBtn = carousel.querySelector(".right-arrow");
-  const dotsWrap = document.querySelector(".testimonials-dots");
+  const setupCarousel = () => {
+    const carousel = document.querySelector(".testimonials-carousel");
+    if (!carousel) return;
+    if (carousel.dataset.testimonialsReady === "true") return;
 
-  if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
+    const track = carousel.querySelector(".testimonials-track");
+    const prevBtn = carousel.querySelector(".left-arrow");
+    const nextBtn = carousel.querySelector(".right-arrow");
+    const dotsWrap = document.querySelector(".testimonials-dots");
 
-  // Collect ORIGINAL slides (before cloning)
-  const originalSlides = Array.from(track.querySelectorAll(".testimonial-card"));
-  if (originalSlides.length === 0) return;
+    if (!track || !prevBtn || !nextBtn || !dotsWrap) {
+      warn("Carousel markup is incomplete. Expected track, arrows, and dots container.");
+      return;
+    }
+
+    // Collect ORIGINAL slides (before cloning)
+    const originalSlides = Array.from(track.querySelectorAll(".testimonial-card"));
+    if (originalSlides.length === 0) {
+      warn("No testimonial cards found in track.");
+      return;
+    }
 
   const getCardsPerView = () => {
     const w = window.innerWidth;
@@ -34,16 +45,40 @@
   // prevent rapid clicks / overlapping transitions
   let isTransitioning = false;
 
-  const step = () => {
-    const slides = Array.from(track.children);
-    const first = slides[0];
-    const second = slides[1];
-    if (!first) return 0;
-    if (!second) return first.getBoundingClientRect().width;
-    const a = first.getBoundingClientRect();
-    const b = second.getBoundingClientRect();
-    return Math.round(b.left - a.left); // width + gap
-  };
+    const gapValue = () => {
+      const style = window.getComputedStyle(track);
+      const raw = style.columnGap || style.gap || "0";
+      const parsed = Number.parseFloat(raw);
+      return Number.isFinite(parsed) ? parsed : 0;
+    };
+
+    const slideWidth = (slide) => {
+      const rectW = slide.getBoundingClientRect().width;
+      if (rectW > 0) return rectW;
+      if (slide.offsetWidth > 0) return slide.offsetWidth;
+      const cssW = Number.parseFloat(window.getComputedStyle(slide).width);
+      return Number.isFinite(cssW) ? cssW : 0;
+    };
+
+    const step = () => {
+      const slides = Array.from(track.children);
+      const first = slides[0];
+      const second = slides[1];
+      if (!first) return 0;
+
+      const firstWidth = slideWidth(first);
+      if (!second) return Math.round(firstWidth);
+
+      const a = first.getBoundingClientRect();
+      const b = second.getBoundingClientRect();
+      let distance = Math.round(b.left - a.left); // width + gap
+
+      if (distance <= 0) {
+        distance = Math.round(firstWidth + gapValue());
+      }
+
+      return Math.max(0, distance);
+    };
 
   const clearClones = () => {
     // Remove everything, re-add originals in order
@@ -121,22 +156,30 @@
     });
   };
 
-  const translateToIndex = (animate = true) => {
-    const x = step() * index;
-    if (!animate) track.classList.add("no-anim");
-    track.style.transform = `translateX(${-x}px)`;
-    if (!animate) {
-      // force reflow so the browser applies transform without anim
-      track.getBoundingClientRect();
-      track.classList.remove("no-anim");
-    }
-  };
+    const translateToIndex = (animate = true) => {
+      const distance = step();
+      if (distance <= 0) return false;
+      const x = distance * index;
+      if (!animate) track.classList.add("no-anim");
+      track.style.transform = `translateX(${-x}px)`;
+      if (!animate) {
+        // force reflow so the browser applies transform without anim
+        track.getBoundingClientRect();
+        track.classList.remove("no-anim");
+      }
+      return true;
+    };
 
-  const update = (animate = true) => {
-    if (animate) isTransitioning = true;
-    translateToIndex(animate);
-    setDots();
-  };
+    const update = (animate = true) => {
+      const moved = translateToIndex(animate);
+      if (!moved) {
+        isTransitioning = false;
+        return false;
+      }
+      if (animate) isTransitioning = true;
+      setDots();
+      return true;
+    };
 
   const goNext = () => {
     if (isTransitioning) return;
@@ -222,21 +265,54 @@
     if (e.key === "ArrowRight") { goNext(); restartAutoplay(); }
   });
 
-  const init = () => {
-    isTransitioning = false;
-    buildClones();
-    renderDots();
-    update(false); // initial position without animation
-    startAutoplay();
+    let rafRetry = 0;
+    const applyWhenReady = () => {
+      if (update(false)) return;
+      rafRetry += 1;
+      if (rafRetry <= 45) {
+        window.requestAnimationFrame(applyWhenReady);
+      }
+    };
+
+    const init = () => {
+      isTransitioning = false;
+      rafRetry = 0;
+      buildClones();
+      renderDots();
+      applyWhenReady(); // initial position without animation when layout is ready
+      startAutoplay();
+    };
+
+    window.addEventListener("resize", () => {
+      // Rebuild clones for new perView, keep user roughly on same dot/page
+      const currentDot = activeDotIndex();
+      init();
+      index = clones + Math.min(currentDot, pageCount() - 1);
+      applyWhenReady();
+    });
+
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(() => {
+        applyWhenReady();
+      });
+      observer.observe(carousel);
+    }
+
+    window.addEventListener("load", () => {
+      applyWhenReady();
+    });
+
+    init();
+    carousel.dataset.testimonialsReady = "true";
   };
 
-  window.addEventListener("resize", () => {
-    // Rebuild clones for new perView, keep user roughly on same dot/page
-    const currentDot = activeDotIndex();
-    init();
-    index = clones + Math.min(currentDot, pageCount() - 1);
-    update(false);
-  });
+  const start = () => {
+    window.requestAnimationFrame(setupCarousel);
+  };
 
-  init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
 })();
