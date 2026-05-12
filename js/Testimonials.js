@@ -180,18 +180,23 @@
       return true;
     };
 
-  const goNext = () => {
+  const moveBy = (delta) => {
     if (isTransitioning) return;
-    index += 1;
-    // If layout is not ready yet, keep logical position unchanged and let retry frame handle placement.
-    if (!update(true)) index -= 1;
+    const previous = index;
+    index += delta;
+    if (!update(true)) {
+      // `translateToIndex` already scheduled a requestAnimationFrame retry for update(false).
+      // Restore logical position so next/prev clicks remain consistent until layout is ready.
+      index = previous;
+    }
+  };
+
+  const goNext = () => {
+    moveBy(1);
   };
 
   const goPrev = () => {
-    if (isTransitioning) return;
-    index -= 1;
-    // If layout is not ready yet, keep logical position unchanged and let retry frame handle placement.
-    if (!update(true)) index += 1;
+    moveBy(-1);
   };
 
   // When transition ends, if we are on a clone region, snap to the matching original
