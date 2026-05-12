@@ -47,37 +47,24 @@
 
     const gapValue = () => {
       const style = window.getComputedStyle(track);
-      const raw = style.columnGap || style.gap || "0";
+      const raw = style.gap || style.columnGap || "0";
       const parsed = parseFloat(raw);
       return Number.isFinite(parsed) ? parsed : 0;
-    };
-
-    const slideWidth = (slide) => {
-      const rectW = slide.getBoundingClientRect().width;
-      if (rectW > 0) return rectW;
-      if (slide.offsetWidth > 0) return slide.offsetWidth;
-      const cssW = parseFloat(window.getComputedStyle(slide).width);
-      return Number.isFinite(cssW) ? cssW : 0;
     };
 
     const step = () => {
       const slides = Array.from(track.children);
       const first = slides[0];
-      const second = slides[1];
       if (!first) return 0;
 
-      const firstWidth = slideWidth(first);
-      if (!second) return Math.round(firstWidth);
-
-      const a = first.getBoundingClientRect();
-      const b = second.getBoundingClientRect();
-      let distance = Math.round(b.left - a.left); // width + gap
-
-      if (distance <= 0) {
-        distance = Math.round(firstWidth + gapValue());
-      }
-
-      return Math.max(0, distance);
+      const width =
+        first.offsetWidth
+        || first.getBoundingClientRect().width
+        || parseFloat(window.getComputedStyle(first).width)
+        || 0;
+      const distance = width + gapValue();
+      if (!Number.isFinite(distance) || distance <= 0) return 0;
+      return distance;
     };
 
   const clearClones = () => {
@@ -123,12 +110,15 @@
     return Math.max(1, originalSlides.length - perView + 1);
   };
 
-  const activeDotIndex = () => {
+  const activeSlideIndex = () => {
     // Map current "index" (track space) back to ORIGINAL page space
     if (originalSlides.length === 0) return 0;
     const i = (index - clones) % originalSlides.length;
-    const normalized = (i + originalSlides.length) % originalSlides.length;
-    return Math.min(normalized, pageCount() - 1);
+    return (i + originalSlides.length) % originalSlides.length;
+  };
+
+  const activeDotIndex = () => {
+    return Math.min(activeSlideIndex(), pageCount() - 1);
   };
 
   const renderDots = () => {
@@ -156,9 +146,18 @@
     });
   };
 
+    let pendingStepFrame = 0;
     const translateToIndex = (animate = true) => {
       const distance = step();
-      if (distance <= 0) return false;
+      if (!Number.isFinite(distance) || distance <= 0) {
+        if (!pendingStepFrame) {
+          pendingStepFrame = window.requestAnimationFrame(() => {
+            pendingStepFrame = 0;
+            update(false);
+          });
+        }
+        return false;
+      }
       const x = distance * index;
       if (!animate) track.classList.add("no-anim");
       track.style.transform = `translateX(${-x}px)`;
@@ -184,13 +183,13 @@
   const goNext = () => {
     if (isTransitioning) return;
     index += 1;
-    update(true);
+    if (!update(true)) index -= 1;
   };
 
   const goPrev = () => {
     if (isTransitioning) return;
     index -= 1;
-    update(true);
+    if (!update(true)) index += 1;
   };
 
   // When transition ends, if we are on a clone region, snap to the matching original
@@ -281,15 +280,15 @@
       layoutRetryCount = 0;
       buildClones();
       renderDots();
-      applyWhenReady(); // initial position without animation when layout is ready
+      window.requestAnimationFrame(applyWhenReady); // wait a frame for clone layout
       startAutoplay();
     };
 
     window.addEventListener("resize", () => {
       // Rebuild clones for new perView, keep user roughly on same dot/page
-      const currentDot = activeDotIndex();
+      const currentSlide = activeSlideIndex();
       init();
-      index = clones + Math.min(currentDot, pageCount() - 1);
+      index = clones + Math.min(currentSlide, pageCount() - 1);
       applyWhenReady();
     });
 
@@ -306,6 +305,7 @@
       // Keep cleanup next to observer setup so this closure can safely reference `observer`.
       window.addEventListener("pagehide", () => {
         if (resizeObserverFrameId) window.cancelAnimationFrame(resizeObserverFrameId);
+        if (pendingStepFrame) window.cancelAnimationFrame(pendingStepFrame);
         observer.disconnect();
       }, { once: true });
     }
