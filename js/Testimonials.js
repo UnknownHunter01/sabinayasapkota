@@ -44,6 +44,7 @@
 
   // prevent rapid clicks / overlapping transitions
   let isTransitioning = false;
+  // 45 frames is ~750ms at 60fps, matching other layout-settle retries in this module.
   const MAX_STEP_RETRIES = 45;
   let pendingStepFrame = 0;
   let stepRetryCount = 0;
@@ -61,6 +62,7 @@
       if (!first) return 0;
 
       const firstRect = first.getBoundingClientRect();
+      // Prefer offsetWidth for stable flex sizing; fall back to rect/CSS width when layout is still settling.
       const width =
         first.offsetWidth
         || firstRect.width
