@@ -48,7 +48,7 @@
     const gapValue = () => {
       const style = window.getComputedStyle(track);
       const raw = style.columnGap || style.gap || "0";
-      const parsed = Number.parseFloat(raw);
+      const parsed = parseFloat(raw);
       return Number.isFinite(parsed) ? parsed : 0;
     };
 
@@ -56,7 +56,7 @@
       const rectW = slide.getBoundingClientRect().width;
       if (rectW > 0) return rectW;
       if (slide.offsetWidth > 0) return slide.offsetWidth;
-      const cssW = Number.parseFloat(window.getComputedStyle(slide).width);
+      const cssW = parseFloat(window.getComputedStyle(slide).width);
       return Number.isFinite(cssW) ? cssW : 0;
     };
 
@@ -265,11 +265,12 @@
     if (e.key === "ArrowRight") { goNext(); restartAutoplay(); }
   });
 
+    const MAX_LAYOUT_RETRIES = 45;
     let rafRetry = 0;
     const applyWhenReady = () => {
       if (update(false)) return;
       rafRetry += 1;
-      if (rafRetry <= 45) {
+      if (rafRetry <= MAX_LAYOUT_RETRIES) {
         window.requestAnimationFrame(applyWhenReady);
       }
     };
