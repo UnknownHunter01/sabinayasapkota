@@ -44,7 +44,9 @@
 
   // prevent rapid clicks / overlapping transitions
   let isTransitioning = false;
+  const MAX_STEP_RETRIES = 45;
   let pendingStepFrame = 0;
+  let stepRetryCount = 0;
 
     const gapValue = () => {
       const style = window.getComputedStyle(track);
@@ -58,9 +60,10 @@
       const first = slides[0];
       if (!first) return 0;
 
+      const firstRect = first.getBoundingClientRect();
       const width =
         first.offsetWidth
-        || first.getBoundingClientRect().width
+        || firstRect.width
         || parseFloat(window.getComputedStyle(first).width)
         || 0;
       const distance = width + gapValue();
@@ -150,7 +153,8 @@
     const translateToIndex = (animate = true) => {
       const distance = step();
       if (!Number.isFinite(distance) || distance <= 0) {
-        if (!pendingStepFrame) {
+        if (!pendingStepFrame && stepRetryCount < MAX_STEP_RETRIES) {
+          stepRetryCount += 1;
           pendingStepFrame = window.requestAnimationFrame(() => {
             pendingStepFrame = 0;
             update(false);
@@ -158,6 +162,7 @@
         }
         return false;
       }
+      stepRetryCount = 0;
       const x = distance * index;
       if (!animate) track.classList.add("no-anim");
       track.style.transform = `translateX(${-x}px)`;
@@ -185,7 +190,8 @@
     const previous = index;
     index += delta;
     if (!update(true)) {
-      // `translateToIndex` already scheduled a requestAnimationFrame retry for update(false).
+      // `update` returns false only when `translateToIndex` cannot get a valid step yet.
+      // In that case, `translateToIndex` already scheduled a requestAnimationFrame retry for update(false).
       // Restore logical position so next/prev clicks remain consistent until layout is ready.
       index = previous;
     }
@@ -285,6 +291,7 @@
     const init = () => {
       isTransitioning = false;
       layoutRetryCount = 0;
+      stepRetryCount = 0;
       buildClones();
       renderDots();
       window.requestAnimationFrame(applyWhenReady); // wait a frame for clone layout
