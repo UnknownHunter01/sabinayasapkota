@@ -598,34 +598,66 @@ font-weight: 800;
 color: white;
 margin: -1px -1px 0px;
 }
-.timeline-content{
-    background-color: transparent;
-    border: 3px solid var(--main-color);
-    padding: 30px 50px;
-    border-radius: 4rem;
-    box-shadow: 0 0 10px var(--main-color);
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    height: 120px;
-}
 .timeline-content:hover{
     transform: scale(1.05);
     box-shadow: 0 0 25px var(--main-color);
 }
+.timeline-content{
+    background-color: transparent;
+    border: 3px solid var(--main-color);
+    padding: 24px 32px;
+    border-radius: 4rem;
+    box-shadow: 0 0 10px var(--main-color);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    height: auto;          /* key fix */
+    min-height: 110px;     /* keeps box shape */
+}
+
 .timeline-content h3{
     font-size: 20px;
     color: white;
-    margin: -20px -10px -35px;
+    margin: 0 0 8px 0;     /* remove negative margins */
     font-weight: 500;
 }
+
 .timeline-content p{
-    color:white;
+    color: white;
     font-size: 15px;
     font-weight: 300;
     line-height: 22px;
-    margin-top: 30px;
-    margin-left: -10px;
+    margin: 0;             /* remove forced offsets */
 }
+/* Make timeline single-column on smaller screens / normal zoom */
+@media (max-width: 1100px){
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even){
+      padding-right: 0;
+      padding-left: 0;
+      text-align: left;
+  }
+
+  .timeline-items::before{
+      left: 24px;              /* move vertical line to the left */
+      height: 100%;
+  }
+
+  .timeline-dot{
+      left: 16px;              /* align dot with the line */
+  }
+
+  .timeline-date{
+      margin-left: 60px;       /* keep date away from the line */
+  }
+
+  .timeline-content{
+      margin-left: 60px;       /* card sits to right of the line */
+      border-radius: 2.5rem;
+      padding: 22px 26px;
+  }
+}
+.timeline-items{ max-height: 1300px; }
 
 /*Service Section*/
 
