@@ -753,7 +753,7 @@ h2 {
   margin: 0;
   font-size: 2rem;
   line-height: 1.9;
-  color: rgba(255,255,255,0.92);
+  color: var(--text-color);
 }
 
 /* Arrows */
