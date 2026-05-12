@@ -294,17 +294,18 @@
     });
 
     if ("ResizeObserver" in window) {
-      let resizeObserverFrame = 0;
+      let resizeObserverFrameId = 0;
       const observer = new ResizeObserver(() => {
-        if (resizeObserverFrame) return;
-        resizeObserverFrame = window.requestAnimationFrame(() => {
-          resizeObserverFrame = 0;
+        if (resizeObserverFrameId) return;
+        resizeObserverFrameId = window.requestAnimationFrame(() => {
+          resizeObserverFrameId = 0;
           applyWhenReady();
         });
       });
       observer.observe(carousel);
+      // Keep cleanup next to observer setup so this closure can safely reference `observer`.
       window.addEventListener("pagehide", () => {
-        if (resizeObserverFrame) window.cancelAnimationFrame(resizeObserverFrame);
+        if (resizeObserverFrameId) window.cancelAnimationFrame(resizeObserverFrameId);
         observer.disconnect();
       }, { once: true });
     }
