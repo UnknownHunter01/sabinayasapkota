@@ -44,6 +44,7 @@
 
   // prevent rapid clicks / overlapping transitions
   let isTransitioning = false;
+  let pendingStepFrame = 0;
 
     const gapValue = () => {
       const style = window.getComputedStyle(track);
@@ -146,7 +147,6 @@
     });
   };
 
-    let pendingStepFrame = 0;
     const translateToIndex = (animate = true) => {
       const distance = step();
       if (!Number.isFinite(distance) || distance <= 0) {
@@ -183,12 +183,14 @@
   const goNext = () => {
     if (isTransitioning) return;
     index += 1;
+    // If layout is not ready yet, keep logical position unchanged and let retry frame handle placement.
     if (!update(true)) index -= 1;
   };
 
   const goPrev = () => {
     if (isTransitioning) return;
     index -= 1;
+    // If layout is not ready yet, keep logical position unchanged and let retry frame handle placement.
     if (!update(true)) index += 1;
   };
 
