@@ -265,20 +265,20 @@
     if (e.key === "ArrowRight") { goNext(); restartAutoplay(); }
   });
 
-    // ~45 frames is ~750ms at 60fps, enough for delayed layout/images to settle.
+    // Approximately 45 frames is about 750ms at 60fps, enough for delayed layout/images to settle.
     const MAX_LAYOUT_RETRIES = 45;
-    let rafRetry = 0;
+    let layoutRetryCount = 0;
     const applyWhenReady = () => {
       if (update(false)) return;
-      rafRetry += 1;
-      if (rafRetry <= MAX_LAYOUT_RETRIES) {
+      layoutRetryCount += 1;
+      if (layoutRetryCount <= MAX_LAYOUT_RETRIES) {
         window.requestAnimationFrame(applyWhenReady);
       }
     };
 
     const init = () => {
       isTransitioning = false;
-      rafRetry = 0;
+      layoutRetryCount = 0;
       buildClones();
       renderDots();
       applyWhenReady(); // initial position without animation when layout is ready
@@ -294,11 +294,17 @@
     });
 
     if ("ResizeObserver" in window) {
+      let resizeObserverFrame = 0;
       const observer = new ResizeObserver(() => {
-        applyWhenReady();
+        if (resizeObserverFrame) return;
+        resizeObserverFrame = window.requestAnimationFrame(() => {
+          resizeObserverFrame = 0;
+          applyWhenReady();
+        });
       });
       observer.observe(carousel);
       window.addEventListener("pagehide", () => {
+        if (resizeObserverFrame) window.cancelAnimationFrame(resizeObserverFrame);
         observer.disconnect();
       }, { once: true });
     }
