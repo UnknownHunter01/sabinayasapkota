@@ -265,7 +265,7 @@
     if (e.key === "ArrowRight") { goNext(); restartAutoplay(); }
   });
 
-    // Approximately 45 frames is about 750ms at 60fps, enough for delayed layout/images to settle.
+    // 45 frames equals 750ms at 60fps, enough for delayed layout/images to settle.
     const MAX_LAYOUT_RETRIES = 45;
     let layoutRetryCount = 0;
     const applyWhenReady = () => {
