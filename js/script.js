@@ -57,6 +57,104 @@ document.addEventListener("DOMContentLoaded", () => {
         navbar.classList.toggle('active');
     };
 
+    // ===== Scroll Reveal ("Scrollibity") =====
+    // Mirrors Mostudio's contentWayPoint(): when a group's container enters the
+    // viewport, every item inside cascades in one after another (50ms apart),
+    // rather than each item fading in independently. This removes data-aos from
+    // these grids so the cascade timing isn't fighting with AOS's own animation.
+    // .testimonial-card is excluded: the carousel script clones those nodes for
+    // its infinite-loop effect, and clones never get observed/revealed.
+    const revealGroupSelectors = [
+        '.skills-grid',
+        '.certificates-grid',
+        '.timeline-items',
+        '.services-grid',
+        '.portfolio-grid'
+    ];
+
+    const revealGroups = document.querySelectorAll(revealGroupSelectors.join(', '));
+
+    revealGroups.forEach(group => {
+        const items = Array.from(group.children);
+        items.forEach(el => {
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-easing');
+            el.classList.add('reveal');
+        });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const items = Array.from(entry.target.children);
+                items.forEach((el, k) => {
+                    setTimeout(() => {
+                        el.classList.add('reveal-visible');
+                    }, k * 50);
+                });
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    revealGroups.forEach(group => revealObserver.observe(group));
+
+    // ===== Portfolio Filter =====
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            portfolioItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                if (filter === 'all' || filter === category) {
+                    item.classList.remove('is-hidden');
+                } else {
+                    item.classList.add('is-hidden');
+                }
+            });
+        });
+    });
+
+    // ===== Portfolio Lightbox =====
+    const lightbox = document.getElementById('portfolio-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.preview-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = link.closest('.portfolio-card');
+            const img = card ? card.querySelector('img') : null;
+            if (img && lightbox && lightboxImg) {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+            }
+            // If this card is still a placeholder (no real image yet), do nothing.
+        });
+    });
+
+    function closeLightbox() {
+        if (lightbox) lightbox.classList.remove('active');
+    }
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
     // Form submission handling
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

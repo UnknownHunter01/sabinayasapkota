@@ -531,6 +531,39 @@ body {
     width: 10px;
 }
 
+/* ===== Scroll Reveal ("Scrollibity") ===== */
+/* Mirrors Mostudio's ftco-animate pattern: items start hidden, then cascade in
+   with a snappy fade+rise as the group enters the viewport, each item offset
+   by a per-item delay so they pop in one after another rather than all at once. */
+.reveal{
+    opacity: 0;
+    visibility: hidden;
+}
+.reveal-visible{
+    animation: revealFadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes revealFadeInUp{
+    from{
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(0, 40px, 0);
+    }
+    to{
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce){
+    .reveal{
+        opacity: 1;
+        visibility: visible;
+    }
+    .reveal-visible{
+        animation: none;
+    }
+}
+
 /*Education Section*/
 
 .timeline-icon {
@@ -720,6 +753,238 @@ h2 {
     background-color: var(--bg-color);
 }
 
+.projects-intro{
+    text-align: center;
+    font-size: 1.8rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 700px;
+    margin: 1rem auto 4rem;
+}
+.projects-intro span{
+    color: var(--main-color);
+}
+
+/* Filter buttons */
+.portfolio-filters{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-bottom: 4rem;
+}
+.filter-btn{
+    background: transparent;
+    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    padding: 0.8rem 2.2rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+}
+.filter-btn:hover{
+    box-shadow: 0 0 20px var(--main-color);
+    transform: translateY(-2px);
+}
+.filter-btn.active{
+    background-color: var(--main-color);
+    color: black;
+    box-shadow: 0 0 25px var(--main-color);
+}
+
+/* Grid */
+.portfolio-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.portfolio-item{
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.portfolio-item.is-hidden{
+    display: none;
+}
+.portfolio-card{
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 3px solid var(--main-color);
+    aspect-ratio: 4 / 3;
+    background-color: var(--second-bg-color);
+    cursor: pointer;
+}
+.portfolio-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+.portfolio-card:hover img{
+    transform: scale(1.1);
+}
+.portfolio-placeholder{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+        135deg,
+        var(--second-bg-color) 0px,
+        var(--second-bg-color) 24px,
+        rgba(246, 11, 11, 0.05) 24px,
+        rgba(246, 11, 11, 0.05) 48px
+    );
+    transition: transform 0.5s ease;
+}
+.portfolio-card:hover .portfolio-placeholder{
+    transform: scale(1.1);
+}
+.portfolio-placeholder i{
+    font-size: 5rem;
+    color: var(--main-color);
+    opacity: 0.6;
+}
+.projects-note{
+    text-align: center;
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.45);
+    max-width: 650px;
+    margin: 3rem auto 0;
+    line-height: 1.7;
+}
+.projects-note code{
+    color: var(--main-color);
+    font-family: monospace;
+    background: var(--second-bg-color);
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.4rem;
+}
+.portfolio-overlay{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(8,8,8,0.88);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+.portfolio-card:hover .portfolio-overlay{
+    opacity: 1;
+}
+.portfolio-tag{
+    background-color: var(--main-color);
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.3rem 1.2rem;
+    border-radius: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05rem;
+}
+.portfolio-overlay h4{
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
+}
+.portfolio-overlay p{
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
+}
+.portfolio-actions{
+    display: flex;
+    gap: 1.5rem;
+}
+.portfolio-icon-link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    font-size: 2rem;
+    transition: 0.3s ease;
+}
+.portfolio-icon-link:hover{
+    background-color: var(--main-color);
+    color: black;
+    box-shadow: 0 0 20px var(--main-color);
+}
+
+/* Lightbox */
+.portfolio-lightbox{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+.portfolio-lightbox.active{
+    display: flex;
+}
+.portfolio-lightbox img{
+    max-width: 88vw;
+    max-height: 85vh;
+    border-radius: 1rem;
+    border: 3px solid var(--main-color);
+    box-shadow: 0 0 50px var(--main-color);
+}
+.lightbox-close{
+    position: absolute;
+    top: 3rem;
+    right: 4rem;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    font-size: 3rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.3s ease;
+}
+.lightbox-close:hover{
+    background-color: var(--main-color);
+    color: black;
+}
+
+@media (max-width: 1100px){
+    .portfolio-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px){
+    .portfolio-grid{
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .filter-btn{
+        padding: 0.7rem 1.6rem;
+        font-size: 1.3rem;
+    }
+    .lightbox-close{
+        top: 2rem;
+        right: 2rem;
+    }
+}
+
 /*Testimonials (theme-matching) */
 .testimonials{
   background: var(--bg-color);
@@ -794,6 +1059,27 @@ h2 {
   object-fit: cover;
   border: 3px solid var(--main-color);
   box-shadow: 0 0 18px rgba(246, 11, 11, 0.7);
+}
+
+.profile-pic-placeholder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--second-bg-color);
+}
+.profile-pic-placeholder i{
+  font-size: 3.6rem;
+  color: var(--main-color);
+  opacity: 0.7;
+}
+
+.testimonials-note{
+    text-align: center;
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.45);
+    max-width: 650px;
+    margin: 2.5rem auto 0;
+    line-height: 1.7;
 }
 
 /* Card layout inside testimonial */

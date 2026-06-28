@@ -88,7 +88,10 @@
     const slidesNow = Array.from(track.children); // originals only
 
     if (slidesNow.length <= clones) {
-      // Not enough slides to meaningfully clone; still position safely
+      // Not enough slides to meaningfully clone; no clone nodes are added,
+      // so `clones` must be 0 or downstream index math (transitionend snap,
+      // activeSlideIndex) will assume clones exist that aren't actually there.
+      clones = 0;
       index = 0;
       return;
     }
@@ -190,7 +193,17 @@
   const moveBy = (delta) => {
     if (isTransitioning) return;
     const previous = index;
-    index += delta;
+
+    if (clones === 0) {
+      // No clones exist (not enough slides to build a seamless loop region),
+      // so wrap manually within the real slide count instead of relying on
+      // the clone-region snap logic in the transitionend handler.
+      const total = originalSlides.length;
+      index = ((index + delta) % total + total) % total;
+    } else {
+      index += delta;
+    }
+
     if (!update(true)) {
       // `update` returns false only when `translateToIndex` cannot get a valid step yet.
       // In that case, `translateToIndex` already scheduled a requestAnimationFrame retry for update(false).
