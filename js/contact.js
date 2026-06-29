@@ -19,15 +19,20 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   status.textContent = '';
   status.className = 'form-status';
 
-fetch(SCRIPT_URL, {
-  method: 'POST',
-  mode: 'no-cors',
-  body: new URLSearchParams(data)
-})
-  .then(() => {
-    status.textContent = 'Message sent successfully!';
-    status.classList.add('success');
-    document.getElementById('contactForm').reset();
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new URLSearchParams(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.result === 'success') {
+      status.textContent = 'Message sent successfully!';
+      status.classList.add('success');
+      document.getElementById('contactForm').reset();
+    } else {
+      status.textContent = 'Something went wrong: ' + result.error;
+      status.classList.add('error');
+    }
   })
   .catch(() => {
     status.textContent = 'Something went wrong. Please try again.';
