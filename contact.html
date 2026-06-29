@@ -113,34 +113,64 @@
     </div>
 
     <div class="contact-form-wrap">
-      <h2 class="section-title">Get In Touch</h2>
+    <h2 class="section-title">Get In Touch</h2>
 
-      <form id="contactForm" class="contact-form">
+    <form id="contactForm" class="contact-form">
+
         <div class="form-row">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" name="name" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" required>
-          </div>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                >
+            </div>
         </div>
 
         <div class="form-group">
-          <label>Subject</label>
-          <input type="text" name="subject" required>
+            <label for="subject">Subject</label>
+            <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+            >
         </div>
 
         <div class="form-group">
-          <label>Message</label>
-          <textarea name="message" rows="5" required></textarea>
+            <label for="message">Message</label>
+            <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+            ></textarea>
         </div>
 
-        <button type="submit" class="btn" id="contactSubmitBtn">Send Message</button>
-        <p class="form-status" id="formStatus"></p>
-      </form>
-    </div>
+        <button
+            type="submit"
+            class="btn"
+            id="contactSubmitBtn"
+        >
+            Send Message
+        </button>
+
+        <p id="formStatus" class="form-status"></p>
+
+    </form>
+</div>
   </div>
 
   <div class="contact-map">

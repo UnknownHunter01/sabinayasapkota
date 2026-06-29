@@ -1,44 +1,38 @@
+const scriptURL = "YOUR_WEB_APP_URL";
+
 const form = document.getElementById("contactForm");
-const status = document.getElementById("formStatus");
 const submitBtn = document.getElementById("contactSubmitBtn");
+const status = document.getElementById("formStatus");
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbx95WDVm4wwUnG6A7_DKhAdAjVt6D-axNXOyNS41yyf1EMcFYQZ2QOn_HBsPKLqdAVX/exec";
-
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     submitBtn.disabled = true;
-    submitBtn.innerText = "Sending...";
+    submitBtn.textContent = "Sending...";
+    status.textContent = "";
 
-    const formData = {
-        Name: form.Name.value,
-        Email: form.Email.value,
-        Subject: form.Subject.value,
-        Message: form.Message.value
-    };
-
-    try {
-        const response = await fetch(scriptURL, {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        const result = await response.json();
-
-        if (result.result === "success") {
-            status.innerHTML = "✅ Message sent successfully!";
+    fetch(scriptURL, {
+        method: "POST",
+        body: new FormData(form)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.result === "success") {
+            status.textContent = "✅ Message sent successfully!";
+            status.style.color = "#22c55e";
             form.reset();
         } else {
-            status.innerHTML = "❌ Something went wrong.";
+            status.textContent = "❌ Something went wrong.";
+            status.style.color = "#ef4444";
         }
-    } catch (err) {
-        status.innerHTML = "❌ Failed to send message.";
+    })
+    .catch(err => {
         console.error(err);
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Send Message";
+        status.textContent = "❌ Failed to send message.";
+        status.style.color = "#ef4444";
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Message";
+    });
 });
