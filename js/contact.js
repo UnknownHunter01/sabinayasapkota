@@ -1,4 +1,4 @@
-const scriptURL = "YOUR_WEB_APP_URL";
+const scriptURL = "https://script.google.com/macros/s/AKfycbx95WDVm4wwUnG6A7_DKhAdAjVt6D-axNXOyNS41yyf1EMcFYQZ2QOn_HBsPKLqdAVX/exec";
 
 const form = document.getElementById("contactForm");
 const submitBtn = document.getElementById("contactSubmitBtn");
