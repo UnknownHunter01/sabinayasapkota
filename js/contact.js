@@ -1,45 +1,44 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzR4WD3WIVvTJTzmRNmoKdyv3w4QK9vcdClzbarH7ZdRL9pjrGhf5IyigfPa75-kpFnIA/exec';
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+const submitBtn = document.getElementById("contactSubmitBtn");
 
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+const scriptURL = "https://script.google.com/macros/s/AKfycbwK67hpUcspcGBFi3uoNqCH3yvTbfrOHqXhPBS3o1NPMlGjbjRkQYN9QtU9YJiA4iYAOQ/exec";
 
-  const btn = document.getElementById('contactSubmitBtn');
-  const status = document.getElementById('formStatus');
-  const formData = new FormData(this);
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const data = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    subject: formData.get('subject'),
-    message: formData.get('message')
-  };
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
 
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  status.textContent = '';
-  status.className = 'form-status';
+    const formData = {
+        Name: form.Name.value,
+        Email: form.Email.value,
+        Subject: form.Subject.value,
+        Message: form.Message.value
+    };
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: new URLSearchParams(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    if (result.result === 'success') {
-      status.textContent = 'Message sent successfully!';
-      status.classList.add('success');
-      document.getElementById('contactForm').reset();
-    } else {
-      status.textContent = 'Something went wrong: ' + result.error;
-      status.classList.add('error');
+    try {
+        const response = await fetch(scriptURL, {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.result === "success") {
+            status.innerHTML = "✅ Message sent successfully!";
+            form.reset();
+        } else {
+            status.innerHTML = "❌ Something went wrong.";
+        }
+    } catch (err) {
+        status.innerHTML = "❌ Failed to send message.";
+        console.error(err);
     }
-  })
-  .catch(() => {
-    status.textContent = 'Something went wrong. Please try again.';
-    status.classList.add('error');
-  })
-  .finally(() => {
-    btn.disabled = false;
-    btn.textContent = 'Send Message';
-  });
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Send Message";
 });
