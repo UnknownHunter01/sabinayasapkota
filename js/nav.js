@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
+/**Music**/
 
 const music = document.getElementById('bgMusic');
 const STORAGE_KEY = 'bgMusicState';
