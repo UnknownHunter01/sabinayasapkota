@@ -4,35 +4,44 @@ const form = document.getElementById("contactForm");
 const submitBtn = document.getElementById("contactSubmitBtn");
 const status = document.getElementById("formStatus");
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
-    status.textContent = "";
+    status.textContent = "Sending your message...";
+    status.style.color = "#666";
 
-    fetch(scriptURL, {
-        method: "POST",
-        body: new FormData(form)
-    })
-    .then(res => res.json())
-    .then(data => {
+    try {
+        const response = await fetch(scriptURL, {
+            method: "POST",
+            body: new FormData(form)
+        });
+
+        const data = await response.json();
+
         if (data.result === "success") {
             status.textContent = "✅ Message sent successfully!";
             status.style.color = "#22c55e";
+
+            submitBtn.textContent = "Sent ✓";
             form.reset();
         } else {
-            status.textContent = "❌ Something went wrong.";
-            status.style.color = "#ef4444";
+            throw new Error(data.error || "Unknown error");
         }
-    })
-    .catch(err => {
-        console.error(err);
-        status.textContent = "❌ Failed to send message.";
+
+    } catch (error) {
+        console.error(error);
+
+        status.textContent = "❌ Failed to send message. Please try again.";
         status.style.color = "#ef4444";
-    })
-    .finally(() => {
+
+        submitBtn.textContent = "Try Again";
+    }
+
+    setTimeout(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = "Send Message";
-    });
+        status.textContent = "";
+    }, 2000);
 });
