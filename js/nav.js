@@ -23,45 +23,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 const music = document.getElementById('bgMusic');
-  const STORAGE_KEY = 'bgMusicState';
+const STORAGE_KEY = 'bgMusicState';
 
-  function saveMusicState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      time: music.currentTime,
-      playing: !music.paused
-    }));
+function saveMusicState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    time: music.currentTime,
+    playing: true
+  }));
+}
+
+function restoreMusicState() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) {
+    return;
   }
 
-  function restoreMusicState() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return;
-
-    const state = JSON.parse(saved);
-    music.currentTime = state.time;
-
-    if (state.playing) {
-      music.play().catch(() => {
-        document.body.addEventListener('click', () => music.play(), { once: true });
-      });
-    }
-  }
-
-  function playMusic() {
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
-    }
-  }
-
-  restoreMusicState();
-
-  setInterval(saveMusicState, 1000);
-
-  window.addEventListener('beforeunload', saveMusicState);
-
-  document.querySelectorAll('a').forEach(link => {
-    if (link.hostname === window.location.hostname || link.getAttribute('href')?.endsWith('.html')) {
-      link.addEventListener('click', saveMusicState);
-    }
+  const state = JSON.parse(saved);
+  music.currentTime = state.time;
+  music.play().catch(() => {
+    document.body.addEventListener('click', () => music.play(), { once: true });
   });
+}
+
+function playMusic() {
+  if (music.paused) {
+    music.play();
+  }
+}
+
+restoreMusicState();
+
+setInterval(saveMusicState, 1000);
+
+window.addEventListener('beforeunload', saveMusicState);
+
+document.querySelectorAll('a').forEach(link => {
+  if (link.hostname === window.location.hostname || link.getAttribute('href')?.endsWith('.html')) {
+    link.addEventListener('click', saveMusicState);
+  }
+});
