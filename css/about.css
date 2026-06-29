@@ -1,0 +1,156 @@
+.about {
+  padding-top: 40px;
+}
+
+.about-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  max-width: 100%;
+  margin: 0 0 40px 0;
+}
+
+.about-main {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+.about-details h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin: 0 0 10px 0;
+}
+
+.about-tagline {
+  font-style: italic;
+  font-size: 15px;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  margin: 0 0 20px 0;
+}
+
+.about-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 30px;
+  margin-bottom: 20px;
+}
+
+.about-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-info li {
+  font-size: 15px;
+  padding: 8px 0;
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
+}
+
+.about-info li i {
+  color: var(--accent-color);
+  margin-right: 6px;
+}
+
+.about-info li strong {
+  color: var(--contrast-color);
+  margin-right: 4px;
+}
+
+.about-extra {
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding-top: 30px;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.stat-item i {
+  font-size: 36px;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.stat-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--contrast-color);
+}
+
+.stat-item p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--contrast-color);
+}
+
+.stat-item p span {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+}
+
+@media (max-width: 992px) {
+  .about-main {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .about-info {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+/* Status Dot Styles */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Turns the circle green */
+.online {
+  background-color: #2ecc71; /* Modern vivid green */
+}
