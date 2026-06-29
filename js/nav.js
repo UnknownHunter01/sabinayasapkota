@@ -50,7 +50,6 @@ function playMusic() {
     music.play();
   }
 }
-
 restoreMusicState();
 
 setInterval(saveMusicState, 1000);
