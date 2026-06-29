@@ -127,6 +127,7 @@ html, body {
     transform: none;
     width: 100%;
     padding: 0 25px;
+    margin-top: 15px;
   }
   .hero-title {
     font-size: 28px;
