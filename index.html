@@ -95,7 +95,7 @@
     <p class="hero-greeting">Hello<span>!</span>,</p>
     <h2 class="hero-title">I am Sabinaya <span>Sapkota</span></h2>
 
-    <p class="hero-role">I'm a <span class="typed" data-typed-items="Front-End Web Developer, Freelancer, Designer">Front-End Web Developer</span></p>
+    <p class="hero-role">I'm <span class="typed">Front-End Web Developer</span></p>
 
     <div class="hero-icons">
       <a href="https://www.instagram.com/sabinaya_sapkota"><i class="bi bi-instagram"></i></a>
@@ -111,5 +111,15 @@
     </div>
   </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+  new Typed(".typed", {
+    strings: ["Front-End Web Developer", "Freelancer", "Designer"],
+    typeSpeed: 70,
+    backSpeed: 40,
+    backDelay: 1500,
+    loop: true
+  });
+</script>
 </body>
 </html>

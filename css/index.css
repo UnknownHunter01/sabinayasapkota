@@ -68,12 +68,17 @@ html, body {
 .hero-role {
   margin: 6px 0 0 0;
   font-size: 22px;
+  min-height: 32px;
   color: var(--contrast-color);
 }
 
 .hero-role .typed {
   color: var(--accent-color);
   font-weight: 600;
+}
+.hero-role .typed-cursor {
+  color: var(--accent-color);
+  font-weight: 400;
 }
 
 .hero-icons {
