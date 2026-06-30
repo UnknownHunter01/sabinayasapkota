@@ -1,3 +1,43 @@
+.links-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  max-width: 100%;
+  margin: 0 0 30px 0;
+}
+
+.links-filters {
+  display: flex;
+  gap: 22px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.links-filter-btn {
+  background: none;
+  border: none;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: 0.3s;
+}
+
+.links-filter-btn:hover {
+  color: var(--contrast-color);
+}
+
+.links-filter-btn.active {
+  color: var(--accent-color);
+}
+
+.link-card.links-hidden {
+  display: none;
+}
+
 .links-page {
   padding-top: 40px;
 }

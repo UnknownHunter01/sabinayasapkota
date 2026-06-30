@@ -47,6 +47,26 @@
         <link href="css/links.css" rel="stylesheet">
         <script src="js/nav.js" defer></script>
         <audio id="bgMusic" src="audio/No Thing.mp3" loop></audio>
+        <script>
+            const linksFilterBtns = document.querySelectorAll('.links-filter-btn');
+            const linkCards = document.querySelectorAll('.link-card');
+
+             linksFilterBtns.forEach(btn => {
+              btn.addEventListener('click', () => {
+               linksFilterBtns.forEach(b => b.classList.remove('active'));
+                 btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+
+             linkCards.forEach(card => {
+             if (filter === 'all' || card.getAttribute('data-category') === filter) {
+             card.classList.remove('links-hidden');
+               } else {
+                    card.classList.add('links-hidden');
+                      }
+                   });
+                  });
+               });
+</script>
     </head>
     <body onclick="playMusic()">
         <header id="header" class="header dark-background d-flex flex-column">
@@ -91,10 +111,21 @@
   <section id="links" class="links-page section dark-background">
   <div class="container">
     <h2 class="section-title">Links</h2>
+    <p class="links-intro">Every place you can find me online — channels, profiles, and projects, all in one spot.</p>
+
+    <div class="links-filters">
+      <button class="links-filter-btn active" data-filter="all">All</button>
+      <button class="links-filter-btn" data-filter="youtube">YouTube</button>
+      <button class="links-filter-btn" data-filter="instagram">Instagram</button>
+      <button class="links-filter-btn" data-filter="web">Website</button>
+      <button class="links-filter-btn" data-filter="twitch">Twitch</button>
+      <button class="links-filter-btn" data-filter="discord">Discord</button>
+      <button class="links-filter-btn" data-filter="spotify">Spotify</button>
+    </div>
 
     <div class="links-grid">
 
-      <div class="link-card">
+      <div class="link-card" data-category="youtube">
         <div class="link-icon"><img src="img/link-icon-1.png" alt=""></div>
         <h3>Crazy Boy Jack</h3>
         <span class="link-platform link-platform-youtube">YouTube</span>
@@ -102,7 +133,7 @@
         <a href="https://youtube.com" class="link-btn" target="_blank">Open Link</a>
       </div>
 
-      <div class="link-card">
+      <div class="link-card" data-category="instagram">
         <div class="link-icon"><img src="img/link-icon-2.png" alt=""></div>
         <h3>Jack</h3>
         <span class="link-platform link-platform-instagram">Instagram</span>
@@ -110,7 +141,7 @@
         <a href="https://instagram.com" class="link-btn" target="_blank">Open Link</a>
       </div>
 
-      <div class="link-card">
+      <div class="link-card" data-category="web">
         <div class="link-icon"><img src="img/link-icon-3.png" alt=""></div>
         <h3>Portfolio</h3>
         <span class="link-platform link-platform-web">Website</span>
@@ -118,7 +149,7 @@
         <a href="https://sabinayasapkota.com.np" class="link-btn" target="_blank">Open Link</a>
       </div>
 
-      <div class="link-card">
+      <div class="link-card" data-category="twitch">
         <div class="link-icon"><img src="img/link-icon-4.png" alt=""></div>
         <h3>Crazy Boy Jack Live</h3>
         <span class="link-platform link-platform-twitch">Twitch</span>
@@ -126,7 +157,7 @@
         <a href="https://twitch.tv" class="link-btn" target="_blank">Open Link</a>
       </div>
 
-      <div class="link-card">
+      <div class="link-card" data-category="discord">
         <div class="link-icon"><img src="img/link-icon-5.png" alt=""></div>
         <h3>Community</h3>
         <span class="link-platform link-platform-discord">Discord</span>
@@ -134,7 +165,7 @@
         <a href="https://discord.com" class="link-btn" target="_blank">Open Link</a>
       </div>
 
-      <div class="link-card">
+      <div class="link-card" data-category="spotify">
         <div class="link-icon"><img src="img/link-icon-6.png" alt=""></div>
         <h3>Playlists</h3>
         <span class="link-platform link-platform-spotify">Spotify</span>
