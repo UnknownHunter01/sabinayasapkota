@@ -1,3 +1,7 @@
+.links-page {
+  padding-top: 40px;
+}
+
 .links-intro {
   font-size: 15px;
   line-height: 1.7;
@@ -34,21 +38,13 @@
   color: var(--accent-color);
 }
 
-.link-card.links-hidden {
-  display: none;
-}
-
-.links-page {
-  padding-top: 40px;
-}
-
 .links-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.link-card {
+.links-card {
   background: color-mix(in srgb, var(--default-color), transparent 95%);
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
   border-radius: 10px;
@@ -60,12 +56,16 @@
   transition: 0.3s;
 }
 
-.link-card:hover {
+.links-card.links-hidden {
+  display: none;
+}
+
+.links-card:hover {
   border-color: var(--accent-color);
   transform: translateY(-4px);
 }
 
-.link-icon {
+.links-icon {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -75,13 +75,13 @@
   background: color-mix(in srgb, var(--default-color), transparent 85%);
 }
 
-.link-icon img {
+.links-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.link-card h3 {
+.links-card h3 {
   font-size: 16px;
   font-weight: 700;
   color: var(--contrast-color);
@@ -89,7 +89,7 @@
   line-height: 1.2;
 }
 
-.link-platform {
+.links-platform {
   display: inline-block;
   font-size: 10px;
   font-weight: 700;
@@ -101,21 +101,21 @@
   margin-bottom: 12px;
 }
 
-.link-platform-youtube { background: #ff000022; color: #ff4d4d; }
-.link-platform-instagram { background: #d6249f22; color: #e1306c; }
-.link-platform-twitch { background: #9146ff22; color: #a970ff; }
-.link-platform-discord { background: #5865f222; color: #7d8bff; }
-.link-platform-spotify { background: #1db95422; color: #2ecf6c; }
-.link-platform-web { background: color-mix(in srgb, var(--accent-color), transparent 80%); color: var(--accent-color); }
+.links-platform-youtube { background: #ff000022; color: #ff4d4d; }
+.links-platform-instagram { background: #d6249f22; color: #e1306c; }
+.links-platform-twitch { background: #9146ff22; color: #a970ff; }
+.links-platform-discord { background: #5865f222; color: #7d8bff; }
+.links-platform-spotify { background: #1db95422; color: #2ecf6c; }
+.links-platform-web { background: color-mix(in srgb, var(--accent-color), transparent 80%); color: var(--accent-color); }
 
-.link-desc {
+.links-desc {
   font-size: 13px;
   line-height: 1.5;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   margin: 0 0 18px 0;
 }
 
-.link-btn {
+.links-btn {
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -132,7 +132,7 @@
   margin-top: auto;
 }
 
-.link-btn:hover {
+.links-btn:hover {
   background: var(--accent-color);
   border-color: var(--accent-color);
   color: black;
@@ -153,6 +153,14 @@
 
   .section-title {
     font-size: 24px;
+  }
+
+  .links-filters {
+    gap: 16px;
+  }
+
+  .links-filter-btn {
+    font-size: 12px;
   }
 
   .links-grid {
