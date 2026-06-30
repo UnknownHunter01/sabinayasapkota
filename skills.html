@@ -131,7 +131,7 @@
         <div class="skill-gauge-wrap">
           <svg viewBox="0 0 120 70" class="skill-gauge">
             <path d="M10,65 A50,50 0 0 1 110,65" fill="none" stroke="#333" stroke-width="10" stroke-linecap="round"/>
-            <path id="gaugeArc" d="M10,65 A50,50 0 0 1 110,65" fill="none" stroke="#7ed957" stroke-width="10" stroke-linecap="round"/>
+            <path id="gaugeArc" d="M10,65 A50,50 0 0 1 10,65" fill="none" stroke="#7ed957" stroke-width="10" stroke-linecap="round"/>
           </svg>
           <div class="skill-gauge-label" id="gaugeLabel">0%</div>
         </div>
@@ -224,6 +224,17 @@
 
   function describeArc(cx, cy, r, startAngle, endAngle) {
     const toXY = (angle) => {
+      const rad = (angle - 180) * Math.PI / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    };
+    const [x1, y1] = toXY(startAngle);
+    const [x2, y2] = toXY(endAngle);
+    const largeArc = (endAngle - startAngle) <= 180 ? 0 : 1;
+    return `M${x1},${y1} A${r},${r} 0 ${largeArc} 1 ${x2},${y2}`;
+  }
+
+  function describeRingArc(cx, cy, r, startAngle, endAngle) {
+    const toXY = (angle) => {
       const rad = (angle - 90) * Math.PI / 180;
       return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
     };
@@ -243,7 +254,7 @@
       const start = i * segAngle + gap / 2;
       const end = (i + 1) * segAngle - gap / 2;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("d", describeArc(100, 100, 80, start, end));
+      path.setAttribute("d", describeRingArc(100, 100, 80, start, end));
       path.setAttribute("fill", "none");
       path.setAttribute("stroke-width", "16");
       path.setAttribute("stroke-linecap", "round");
