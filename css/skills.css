@@ -1,0 +1,243 @@
+.skills-page {
+  padding-top: 40px;
+}
+
+.skills-intro {
+  font-size: 15px;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 0 30px 0;
+}
+
+.skills-category {
+  margin-bottom: 40px;
+  padding-top: 24px;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.skills-category:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.skills-category h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin: 0 0 18px 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.skill-card {
+  position: relative;
+  aspect-ratio: 1;
+  background: color-mix(in srgb, var(--default-color), transparent 92%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.skill-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.skill-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.skill-tooltip {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: color-mix(in srgb, var(--background-color), transparent 15%);
+  color: var(--contrast-color);
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 2px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.skill-card:hover .skill-tooltip {
+  opacity: 1;
+}
+
+.skill-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-modal.skill-modal-active {
+  display: flex;
+}
+
+.skill-modal-content {
+  background: var(--background-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+}
+
+.skill-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  color: var(--contrast-color);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.skill-modal-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.skill-modal-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--accent-color);
+  flex-shrink: 0;
+}
+
+.skill-modal-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skill-modal-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  color: var(--contrast-color);
+}
+
+.skill-type-badge {
+  display: inline-block;
+  background: color-mix(in srgb, var(--accent-color), transparent 80%);
+  color: var(--accent-color);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.skill-progress-view p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 0 24px 0;
+}
+
+.skill-gauge-wrap {
+  position: relative;
+  width: 220px;
+  margin: 0 auto;
+}
+
+.skill-gauge {
+  width: 100%;
+}
+
+.skill-gauge-label {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--contrast-color);
+}
+
+.skill-language-view {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.skill-ring-wrap {
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.skill-ring {
+  width: 100%;
+}
+
+.skill-ring-label {
+  fill: var(--contrast-color);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.skill-ring-legend {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-ring-legend span {
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin-right: 6px;
+  display: inline-block;
+  width: 22px;
+}
+
+@media (max-width: 992px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-page {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .skill-modal-content {
+    padding: 20px;
+  }
+
+  .skill-language-view {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

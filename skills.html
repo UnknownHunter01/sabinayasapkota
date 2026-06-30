@@ -46,6 +46,7 @@
         <link href="css/globalheader.css" rel="stylesheet">
         <script src="js/nav.js" defer></script>
         <audio id="bgMusic" src="audio/No Thing.mp3" loop></audio>
+        <link href="css/skills.css" rel="stylesheet">
     </head>
     <body onclick="playMusic()">
         <header id="header" class="header dark-background d-flex flex-column">
@@ -86,6 +87,204 @@
       </ul>
     </nav>
   </header>
-  
+  <section id="skills" class="skills-page section dark-background">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <p class="skills-intro">A list of skills I learned till now.</p>
+
+    <div class="skills-category">
+      <h3>Technical Skills</h3>
+      <div class="skills-grid" id="technicalGrid"></div>
+    </div>
+
+    <div class="skills-category">
+      <h3>Soft Skills</h3>
+      <div class="skills-grid" id="softGrid"></div>
+    </div>
+
+    <div class="skills-category">
+      <h3>Language Skills</h3>
+      <div class="skills-grid" id="languageGrid"></div>
+    </div>
+
+    <div class="skills-category">
+      <h3>Other Skills</h3>
+      <div class="skills-grid" id="otherGrid"></div>
+    </div>
+  </div>
+
+  <div class="skill-modal" id="skillModal">
+    <div class="skill-modal-content">
+      <span class="skill-modal-close" id="skillModalClose">&times;</span>
+      <div class="skill-modal-top">
+        <div class="skill-modal-photo">
+          <img id="skillModalImg" src="" alt="">
+        </div>
+        <div class="skill-modal-info">
+          <h3 id="skillModalName"></h3>
+          <span class="skill-type-badge" id="skillModalType"></span>
+        </div>
+      </div>
+
+      <div id="skillProgressView" class="skill-progress-view">
+        <p id="skillModalDesc"></p>
+        <div class="skill-gauge-wrap">
+          <svg viewBox="0 0 120 70" class="skill-gauge">
+            <path d="M10,65 A50,50 0 0 1 110,65" fill="none" stroke="#333" stroke-width="10" stroke-linecap="round"/>
+            <path id="gaugeArc" d="M10,65 A50,50 0 0 1 110,65" fill="none" stroke="#7ed957" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+          <div class="skill-gauge-label" id="gaugeLabel">0%</div>
+        </div>
+      </div>
+
+      <div id="languageRingView" class="skill-language-view">
+        <div class="skill-ring-wrap">
+          <svg viewBox="0 0 200 200" class="skill-ring">
+            <g id="ringSegments"></g>
+            <text x="100" y="108" text-anchor="middle" class="skill-ring-label" id="ringLabel">B2</text>
+          </svg>
+        </div>
+        <div class="skill-ring-legend">
+          <div><span>A1</span> Beginner</div>
+          <div><span>A2</span> Elementary</div>
+          <div><span>B1</span> Intermediate</div>
+          <div><span>B2</span> Upper intermediate</div>
+          <div><span>C1</span> Advanced</div>
+          <div><span>C2</span> Proficient (mastery)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const skillsData = {
+    technical: [
+      { name: "JavaScript", img: "img/skill-js.png", percent: 75, desc: "Building interactive websites with vanilla JS, DOM manipulation, and event-driven logic." },
+      { name: "HTML & CSS", img: "img/skill-html.png", percent: 90, desc: "Semantic markup and responsive, modern CSS layouts including flexbox and grid." },
+      { name: "Python", img: "img/skill-python.png", percent: 60, desc: "Scripting, automation, and backend logic for small tools and projects." },
+      { name: "Git & GitHub", img: "img/skill-git.png", percent: 70, desc: "Version control, branching workflows, and hosting static sites via GitHub Pages." },
+      { name: "Figma", img: "img/skill-figma.png", percent: 65, desc: "UI design, prototyping, and translating mockups into working layouts." },
+      { name: "Photopea", img: "img/skill-photopea.png", percent: 55, desc: "Photo editing, compositing, and graphic effects for thumbnails and visuals." }
+    ],
+    soft: [
+      { name: "Communication", img: "img/skill-comm.png", percent: 80, desc: "Explaining technical ideas clearly to both technical and non-technical audiences." },
+      { name: "Time Management", img: "img/skill-time.png", percent: 70, desc: "Balancing multiple projects, content schedules, and deadlines effectively." },
+      { name: "Problem Solving", img: "img/skill-problem.png", percent: 85, desc: "Breaking down complex issues into manageable, solvable steps." },
+      { name: "Adaptability", img: "img/skill-adapt.png", percent: 75, desc: "Adjusting quickly to new tools, feedback, and shifting project requirements." },
+      { name: "Creativity", img: "img/skill-creativity.png", percent: 82, desc: "Bringing original ideas to design, content, and problem solving." },
+      { name: "Teamwork", img: "img/skill-teamwork.png", percent: 68, desc: "Collaborating with others toward shared goals and deadlines." }
+    ],
+    language: [
+      { name: "English", img: "img/skill-english.png", level: "C1" },
+      { name: "Nepali", img: "img/skill-nepali.png", level: "C2" },
+      { name: "German", img: "img/skill-german.png", level: "B2" },
+      { name: "Hindi", img: "img/skill-hindi.png", level: "B1" }
+    ],
+    other: [
+      { name: "Video Editing", img: "img/skill-video.png", percent: 65, desc: "Cutting, color grading, and pacing for YouTube content and vlogs." },
+      { name: "Cooking", img: "img/skill-cooking.png", percent: 60, desc: "Home cooking across a range of cuisines, recipe development and improvisation." },
+      { name: "Fitness Coaching", img: "img/skill-fitness.png", percent: 55, desc: "Basic strength training program design and form guidance." }
+    ]
+  };
+
+  const cefrOrder = ["A1", "A2", "B1", "B2", "C1", "C2"];
+
+  function buildSkillCard(skill, type) {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `<img src="${skill.img}" alt="${skill.name}"><span class="skill-tooltip">${skill.name}</span>`;
+    card.addEventListener('click', () => openSkillModal(skill, type));
+    return card;
+  }
+
+  function renderGrid(id, list, type) {
+    const grid = document.getElementById(id);
+    list.forEach(skill => grid.appendChild(buildSkillCard(skill, type)));
+  }
+
+  renderGrid('technicalGrid', skillsData.technical, 'technical');
+  renderGrid('softGrid', skillsData.soft, 'soft');
+  renderGrid('languageGrid', skillsData.language, 'language');
+  renderGrid('otherGrid', skillsData.other, 'other');
+
+  const skillModal = document.getElementById('skillModal');
+  const skillModalImg = document.getElementById('skillModalImg');
+  const skillModalName = document.getElementById('skillModalName');
+  const skillModalType = document.getElementById('skillModalType');
+  const skillProgressView = document.getElementById('skillProgressView');
+  const languageRingView = document.getElementById('languageRingView');
+  const skillModalDesc = document.getElementById('skillModalDesc');
+  const gaugeArc = document.getElementById('gaugeArc');
+  const gaugeLabel = document.getElementById('gaugeLabel');
+  const ringSegments = document.getElementById('ringSegments');
+  const ringLabel = document.getElementById('ringLabel');
+
+  const typeLabels = { technical: "Technical skill", soft: "Soft skill", language: "Language skill", other: "Other skill" };
+
+  function describeArc(cx, cy, r, startAngle, endAngle) {
+    const toXY = (angle) => {
+      const rad = (angle - 90) * Math.PI / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    };
+    const [x1, y1] = toXY(startAngle);
+    const [x2, y2] = toXY(endAngle);
+    const largeArc = (endAngle - startAngle) <= 180 ? 0 : 1;
+    return `M${x1},${y1} A${r},${r} 0 ${largeArc} 1 ${x2},${y2}`;
+  }
+
+  function buildRing(activeLevel) {
+    ringSegments.innerHTML = '';
+    const activeIndex = cefrOrder.indexOf(activeLevel);
+    const segAngle = 360 / 6;
+    const gap = 4;
+
+    cefrOrder.forEach((lvl, i) => {
+      const start = i * segAngle + gap / 2;
+      const end = (i + 1) * segAngle - gap / 2;
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", describeArc(100, 100, 80, start, end));
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke-width", "16");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke", i <= activeIndex ? "#7ed957" : "#333");
+      ringSegments.appendChild(path);
+    });
+  }
+
+  function openSkillModal(skill, type) {
+    skillModalImg.src = skill.img;
+    skillModalName.textContent = skill.name;
+    skillModalType.textContent = typeLabels[type];
+
+    if (type === 'language') {
+      skillProgressView.style.display = 'none';
+      languageRingView.style.display = 'flex';
+      ringLabel.textContent = skill.level;
+      buildRing(skill.level);
+    } else {
+      languageRingView.style.display = 'none';
+      skillProgressView.style.display = 'block';
+      skillModalDesc.textContent = skill.desc;
+
+      const pct = skill.percent;
+      const angle = (pct / 100) * 180;
+      gaugeArc.setAttribute("d", describeArc(60, 65, 50, 0, angle));
+      gaugeLabel.textContent = pct + "%";
+    }
+
+    skillModal.classList.add('skill-modal-active');
+  }
+
+  document.getElementById('skillModalClose').addEventListener('click', () => {
+    skillModal.classList.remove('skill-modal-active');
+  });
+
+  skillModal.addEventListener('click', (e) => {
+    if (e.target === skillModal) {
+      skillModal.classList.remove('skill-modal-active');
+    }
+  });
+</script>
 </body>
 </html>
