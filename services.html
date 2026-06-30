@@ -46,6 +46,7 @@
         <link href="css/globalheader.css" rel="stylesheet">
         <script src="js/nav.js" defer></script>
         <audio id="bgMusic" src="audio/No Thing.mp3" loop></audio>
+        <link href="css/services.css" rel="stylesheet">
     </head>
     <body onclick="playMusic()">
         <header id="header" class="header dark-background d-flex flex-column">
@@ -85,7 +86,149 @@
         <li>© Copyright Sabinaya Sapkota | All Rights Reserved | Designed by <a href="https://www.sabinayasapkota.com.np">Sabinaya Sapkota</a></li>
       </ul>
     </nav>
-
   </header>
+  <section id="services" class="services-page section dark-background">
+  <div class="container">
+    <h2 class="section-title">Services</h2>
+    <p class="services-intro">A list of services I offer.</p>
 
+    <div class="services-filters">
+      <button class="services-filter-btn active" data-filter="all">All</button>
+      <button class="services-filter-btn" data-filter="design">Design</button>
+      <button class="services-filter-btn" data-filter="development">Development</button>
+      <button class="services-filter-btn" data-filter="language">Language</button>
+    </div>
+
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<section id="platforms" class="platforms-page section dark-background">
+  <div class="container">
+    <h2 class="section-title">Available Platforms</h2>
+    <p class="platforms-intro">You can book from the services listed above or choose from one of your own trusted platform, if listed below.</p>
+
+    <div class="platforms-grid" id="platformsGrid"></div>
+  </div>
+</section>
+
+<div class="service-modal" id="serviceModal">
+  <div class="service-modal-content">
+    <span class="service-modal-close" id="serviceModalClose">&times;</span>
+    <h3 id="serviceModalName"></h3>
+    <span class="service-type-badge" id="serviceModalType"></span>
+
+    <div class="service-modal-body">
+      <div class="service-modal-photo">
+        <img id="serviceModalImg" src="" alt="">
+      </div>
+      <p id="serviceModalDesc"></p>
+    </div>
+
+    <div class="service-modal-footer">
+      <span class="service-modal-price">Starting from <strong id="serviceModalPrice"></strong></span>
+      <a href="#" id="serviceModalHire" class="service-hire-btn" target="_blank">Hire Now</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const servicesData = [
+    { name: "Website Development", type: "development", img: "img/service-1.jpg", desc: "Full custom website builds using HTML, CSS, and JavaScript, from layout to deployment.", price: "$250" },
+    { name: "Landing Page Design", type: "design", img: "img/service-2.jpg", desc: "Single-page conversion-focused designs for products, launches, or portfolios.", price: "$120" },
+    { name: "UI/UX Design", type: "design", img: "img/service-3.jpg", desc: "Wireframes, mockups, and prototypes built in Figma for web or mobile.", price: "$180" },
+    { name: "Bug Fixing & Maintenance", type: "development", img: "img/service-4.jpg", desc: "Ongoing fixes, updates, and small feature additions for existing sites.", price: "$60" },
+    { name: "German Tutoring", type: "language", img: "img/service-5.jpg", desc: "One-on-one German lessons from beginner to upper-intermediate level.", price: "$25" },
+    { name: "Translation Services", type: "language", img: "img/service-6.jpg", desc: "English, Nepali, and German translation for documents and content.", price: "$30" },
+    { name: "Responsive Redesign", type: "development", img: "img/service-7.jpg", desc: "Mobile-friendly overhauls of existing websites that don't work on smaller screens.", price: "$150" },
+    { name: "Brand Identity", type: "design", img: "img/service-8.jpg", desc: "Logo, color palette, and visual identity package for new brands.", price: "$200" }
+  ];
+
+  const platformsData = [
+    { title: "Fiverr", platform: "Fiverr", img: "img/platform-1.jpg", desc: "Book services directly through my Fiverr profile.", link: "https://fiverr.com" },
+    { title: "Upwork", platform: "Upwork", img: "img/platform-2.jpg", desc: "Available for contract work via Upwork.", link: "https://upwork.com" },
+    { title: "Direct Booking", platform: "Email", img: "img/platform-3.jpg", desc: "Reach out directly for custom arrangements.", link: "mailto:your@email.com" },
+    { title: "Discord", platform: "Discord", img: "img/platform-4.jpg", desc: "Message me on Discord to discuss a project.", link: "https://discord.com" }
+  ];
+
+  const typeLabels = { design: "Design", development: "Development", language: "Language" };
+
+  function buildServiceCard(service) {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.setAttribute('data-category', service.type);
+    card.innerHTML = `
+      <span class="service-badge">${typeLabels[service.type]}</span>
+      <img src="${service.img}" alt="${service.name}">
+      <span class="service-card-tooltip">${service.name}</span>
+    `;
+    card.addEventListener('click', () => openServiceModal(service));
+    return card;
+  }
+
+  const servicesGrid = document.getElementById('servicesGrid');
+  servicesData.forEach(s => servicesGrid.appendChild(buildServiceCard(s)));
+
+  function buildPlatformCard(p) {
+    const card = document.createElement('div');
+    card.className = 'platform-card';
+    card.innerHTML = `
+      <span class="service-badge">${typeLabels.development}</span>
+      <img src="${p.img}" alt="${p.title}">
+      <h4>${p.title}</h4>
+      <span class="platform-name-badge">${p.platform}</span>
+      <a href="${p.link}" class="platform-open-btn" target="_blank">Open Link</a>
+    `;
+    return card;
+  }
+
+  const platformsGrid = document.getElementById('platformsGrid');
+  platformsData.forEach(p => platformsGrid.appendChild(buildPlatformCard(p)));
+
+  const serviceModal = document.getElementById('serviceModal');
+  const serviceModalImg = document.getElementById('serviceModalImg');
+  const serviceModalName = document.getElementById('serviceModalName');
+  const serviceModalType = document.getElementById('serviceModalType');
+  const serviceModalDesc = document.getElementById('serviceModalDesc');
+  const serviceModalPrice = document.getElementById('serviceModalPrice');
+  const serviceModalHire = document.getElementById('serviceModalHire');
+
+  function openServiceModal(service) {
+    serviceModalImg.src = service.img;
+    serviceModalName.textContent = service.name;
+    serviceModalType.textContent = typeLabels[service.type];
+    serviceModalDesc.textContent = service.desc;
+    serviceModalPrice.textContent = service.price;
+    serviceModalHire.href = "contact.html";
+    serviceModal.classList.add('service-modal-active');
+  }
+
+  document.getElementById('serviceModalClose').addEventListener('click', () => {
+    serviceModal.classList.remove('service-modal-active');
+  });
+
+  serviceModal.addEventListener('click', (e) => {
+    if (e.target === serviceModal) {
+      serviceModal.classList.remove('service-modal-active');
+    }
+  });
+
+  const servicesFilterBtns = document.querySelectorAll('.services-filter-btn');
+  servicesFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      servicesFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+
+      document.querySelectorAll('.service-card').forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.classList.remove('service-hidden');
+        } else {
+          card.classList.add('service-hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
 </html>

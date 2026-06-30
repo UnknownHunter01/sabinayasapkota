@@ -1,0 +1,303 @@
+.services-page, .platforms-page {
+  padding-top: 40px;
+}
+
+.services-intro, .platforms-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  max-width: 100%;
+  margin: 0 0 30px 0;
+}
+
+.services-filters {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.services-filter-btn {
+  background: none;
+  border: none;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: 0.3s;
+}
+
+.services-filter-btn:hover {
+  color: var(--contrast-color);
+}
+
+.services-filter-btn.active {
+  color: var(--accent-color);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.service-card.service-hidden {
+  display: none;
+}
+
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+  display: block;
+}
+
+.service-card:hover img {
+  transform: scale(1.08);
+}
+
+.service-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--accent-color);
+  color: black;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 16px;
+  z-index: 2;
+}
+
+.service-card-tooltip {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  padding: 26px 14px 12px;
+  font-size: 13px;
+  color: var(--contrast-color);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.service-card:hover .service-card-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.platform-card {
+  position: relative;
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.platform-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.platform-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin: 0 0 8px 0;
+}
+
+.platform-name-badge {
+  display: inline-block;
+  background: color-mix(in srgb, var(--accent-color), transparent 75%);
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+}
+
+.platform-open-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 8px 0;
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: black;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.platform-open-btn:hover {
+  background: var(--accent-color);
+}
+
+.service-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-modal.service-modal-active {
+  display: flex;
+}
+
+.service-modal-content {
+  background: var(--background-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 650px;
+  position: relative;
+  text-align: center;
+}
+
+.service-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  color: var(--contrast-color);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.service-modal-content h3 {
+  font-size: 24px;
+  color: var(--contrast-color);
+  margin: 0 0 10px 0;
+}
+
+.service-type-badge {
+  display: inline-block;
+  background: color-mix(in srgb, var(--accent-color), transparent 75%);
+  color: var(--accent-color);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.service-modal-body {
+  display: flex;
+  gap: 20px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.service-modal-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.service-modal-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-modal-body p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
+  margin: 0;
+}
+
+.service-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.service-modal-price {
+  font-size: 14px;
+  color: var(--contrast-color);
+}
+
+.service-modal-price strong {
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+.service-hire-btn {
+  display: inline-block;
+  padding: 10px 26px;
+  background: var(--accent-color);
+  color: black;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.service-hire-btn:hover {
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+@media (max-width: 992px) {
+  .services-grid, .platforms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .services-page, .platforms-page {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .services-grid, .platforms-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service-modal-body {
+    flex-direction: column;
+  }
+
+  .service-modal-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
