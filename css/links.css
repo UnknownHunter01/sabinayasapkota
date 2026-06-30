@@ -78,15 +78,6 @@
   font-size: 26px;
   color: var(--accent-color);
 }
-.links-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--accent-color);
-  margin-bottom: 14px;
-  background: color-mix(in srgb, var(--default-color), transparent 85%);
-}
 
 .links-icon img {
   width: 100%;
