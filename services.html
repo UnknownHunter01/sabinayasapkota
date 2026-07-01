@@ -145,10 +145,10 @@
   ];
 
   const platformsData = [
-    { title: "Fiverr", img: "img/platform-1.jpg", desc: "Book services directly through my Fiverr profile.", link: "https://fiverr.com" },
-    { title: "Upwork", img: "img/platform-2.jpg", desc: "Available for contract work via Upwork.", link: "https://upwork.com" },
-    { title: "Direct Booking", img: "img/platform-3.jpg", desc: "Reach out directly for custom arrangements.", link: "mailto:your@email.com" },
-    { title: "Discord", img: "img/platform-4.jpg", desc: "Message me on Discord to discuss a project.", link: "https://discord.com" }
+    { title: "Fiverr", platform: "Fiverr", img: "img/platform-1.jpg", desc: "Book services directly through my Fiverr profile.", link: "https://fiverr.com" },
+    { title: "Upwork", platform: "Upwork", img: "img/platform-2.jpg", desc: "Available for contract work via Upwork.", link: "https://upwork.com" },
+    { title: "Direct Booking", platform: "Email", img: "img/platform-3.jpg", desc: "Reach out directly for custom arrangements.", link: "mailto:your@email.com" },
+    { title: "Discord", platform: "Discord", img: "img/platform-4.jpg", desc: "Message me on Discord to discuss a project.", link: "https://discord.com" }
   ];
 
   const typeLabels = { design: "Design", development: "Development", language: "Language" };
@@ -158,7 +158,6 @@
     card.className = 'service-card';
     card.setAttribute('data-category', service.type);
     card.innerHTML = `
-      <span class="service-badge">${typeLabels[service.type]}</span>
       <img src="${service.img}" alt="${service.name}">
       <span class="service-card-tooltip">${service.name}</span>
     `;
