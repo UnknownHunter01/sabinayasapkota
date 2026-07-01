@@ -158,6 +158,7 @@
     card.className = 'service-card';
     card.setAttribute('data-category', service.type);
     card.innerHTML = `
+      <span class="service-badge">${typeLabels[service.type]}</span>
       <img src="${service.img}" alt="${service.name}">
       <span class="service-card-tooltip">${service.name}</span>
     `;
@@ -174,7 +175,6 @@
     card.innerHTML = `
       <img src="${p.img}" alt="${p.title}">
       <h4>${p.title}</h4>
-      <span class="platform-name-badge">${p.platform}</span>
       <a href="${p.link}" class="platform-open-btn" target="_blank">Open Link</a>
     `;
     return card;
