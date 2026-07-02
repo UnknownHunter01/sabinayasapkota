@@ -170,13 +170,14 @@
   function buildPlatformCard(p) {
     const card = document.createElement('div');
     card.className = 'platform-card';
+    const sameTab = p.link === '/contact';
     card.innerHTML = `
       <img src="${p.img}" alt="${p.title}">
       <h1>${p.title}</h1>
       <p>${p.desc}</p>
-      <a href="${p.link}" class="platform-open-btn" target="_blank">Open Link</a>
+      <a href="${p.link}" class="platform-open-btn" ${sameTab ? '' : 'target="_blank"'}>Open Link</a>
     `;
-    return card;
+   return card;
   }
 
   const platformsGrid = document.getElementById('platformsGrid');
