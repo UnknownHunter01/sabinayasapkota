@@ -154,3 +154,40 @@
 .online {
   background-color: #2ecc71; /* Modern vivid green */
 }
+/* Links */
+.links-cta {
+  text-align: center;
+  padding-top: 40px;
+  margin-top: 40px;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.links-cta h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin: 0 0 10px 0;
+}
+
+.links-cta p {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  margin: 0 0 20px 0;
+}
+
+.links-cta-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.links-cta-btn:hover {
+  background: var(--accent-color);
+  color: black;
+}
