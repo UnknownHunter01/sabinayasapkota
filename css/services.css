@@ -114,6 +114,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 100%;
 }
 
 .platform-card img {
@@ -152,6 +153,7 @@
   font-weight: 700;
   border-radius: 20px;
   transition: 0.3s;
+  margin-top: auto;
 }
 
 .platform-open-btn:hover {
