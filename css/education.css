@@ -1,0 +1,126 @@
+.education {
+  padding-top: 40px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: var(--contrast-color);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 30px;
+  border-left: 2px solid var(--accent-color);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -39px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--background-color);
+  border: 2px solid var(--accent-color);
+}
+
+.timeline-item h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+.timeline-date {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin-bottom: 10px;
+}
+
+.timeline-place {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--contrast-color);
+  margin: 0 0 12px 0;
+}
+
+.timeline-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .education {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline-item {
+    padding-bottom: 30px;
+  }
+
+  .timeline-item::before {
+    left: -29px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timeline-item h3 {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .timeline-date {
+    font-size: 14px;
+  }
+
+  .timeline-place {
+    font-size: 14px;
+  }
+
+  .timeline-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+}

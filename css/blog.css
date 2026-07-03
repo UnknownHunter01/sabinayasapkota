@@ -1,0 +1,96 @@
+.split-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.split-divider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.split-divider line {
+  stroke: var(--accent-color);
+  stroke-width: 3;
+}
+
+.split-half {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.split-half img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.split-overlay {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--background-color), transparent 35%);
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.split-half:hover .split-overlay {
+  background: color-mix(in srgb, var(--background-color), transparent 55%);
+}
+
+.split-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 28px;
+  padding: 40px;
+}
+
+@media (max-width: 768px) {
+  .split-section {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    min-height: auto;
+  }
+
+  .split-divider {
+    display: none;
+  }
+
+  .split-half {
+    padding: 60px 30px;
+    min-height: 50vh;
+  }
+
+  .split-half:first-of-type {
+    border-bottom: 2px solid var(--accent-color);
+  }
+
+  .split-half h1 {
+    font-size: 36px;
+  }
+
+  .split-half p {
+    font-size: 13px;
+    max-width: 280px;
+  }
+
+  .btn, .btn-outline {
+    padding: 0.9rem 2.2rem;
+    font-size: 1.4rem;
+  }
+}
