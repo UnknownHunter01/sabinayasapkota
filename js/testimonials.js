@@ -1,4 +1,4 @@
-  const track = document.getElementById('testimonialTrack');
+const track = document.getElementById('testimonialTrack');
   const dotsContainer = document.getElementById('testimonialDots');
   const originalSlides = Array.from(track.children);
   const totalOriginal = originalSlides.length;
@@ -87,10 +87,14 @@
     startAutoScroll();
   }
 
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    slidesPerView = getSlidesPerView();
-    cloneSlides();
-    buildDots();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      slidesPerView = getSlidesPerView();
+      cloneSlides();
+      buildDots();
+    }, 150);
   });
 
   cloneSlides();

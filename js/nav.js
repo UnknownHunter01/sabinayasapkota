@@ -56,8 +56,9 @@ setInterval(saveMusicState, 1000);
 
 window.addEventListener('beforeunload', saveMusicState);
 
-document.querySelectorAll('a').forEach(link => {
-  if (link.hostname === window.location.hostname || link.getAttribute('href')?.endsWith('.html')) {
-    link.addEventListener('click', saveMusicState);
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a');
+  if (link && (link.hostname === window.location.hostname || link.getAttribute('href')?.endsWith('.html'))) {
+    saveMusicState();
   }
 });
