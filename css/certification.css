@@ -68,17 +68,24 @@
   transform: scale(1.08);
 }
 
-.cert-badge {
+.cert-badges {
   position: absolute;
   top: 12px;
   left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.cert-badge {
   background: var(--accent-color);
   color: black;
   font-size: 12px;
   font-weight: 700;
   padding: 4px 12px;
   border-radius: 20px;
-  z-index: 2;
+  white-space: nowrap;
 }
 
 .cert-caption {
