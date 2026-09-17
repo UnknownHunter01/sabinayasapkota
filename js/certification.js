@@ -32,8 +32,12 @@ const certLightboxClose = document.getElementById('certLightboxClose');
 const certLightboxPrev = document.getElementById('certLightboxPrev');
 const certLightboxNext = document.getElementById('certLightboxNext');
 const certZoomHint = document.getElementById('certZoomHint');
+const certFlipBtn = document.getElementById('certFlipBtn');
 
 let isZoomed = false;
+let showingImg2 = false;
+let currentImg1 = '';
+let currentImg2 = '';
 
 function resetZoom() {
   certLightboxImg.classList.remove('cert-zoomed');
@@ -55,6 +59,13 @@ certLightboxImg.addEventListener('click', (e) => {
   }
 });
 
+certFlipBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showingImg2 = !showingImg2;
+  certLightboxImg.src = showingImg2 ? currentImg2 : currentImg1;
+  resetZoom();
+});
+
 function openCertLightbox(item) {
   certCurrentIndex = certVisibleItems.indexOf(item);
   showCertItem(certVisibleItems[certCurrentIndex]);
@@ -63,12 +74,23 @@ function openCertLightbox(item) {
 
 function showCertItem(item) {
   resetZoom();
+  showingImg2 = false;
+
   const img = item.querySelector('img');
-  certLightboxImg.src = img.src;
+  currentImg1 = img.src;
+  currentImg2 = item.getAttribute('data-img2') || '';
+
+  certLightboxImg.src = currentImg1;
   certLightboxImg.alt = img.alt;
   certLightboxTitle.textContent = item.getAttribute('data-title') || '';
   certLightboxDesc.textContent = item.getAttribute('data-desc') || '';
   certLightboxDate.textContent = item.getAttribute('data-date') || '';
+
+  if (currentImg2) {
+    certFlipBtn.classList.remove('cert-flip-hidden');
+  } else {
+    certFlipBtn.classList.add('cert-flip-hidden');
+  }
 
   const verifyUrl = item.getAttribute('data-verify');
   if (verifyUrl) {

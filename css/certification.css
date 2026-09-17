@@ -180,6 +180,27 @@
   pointer-events: none;
 }
 
+.cert-flip-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: color-mix(in srgb, var(--background-color), transparent 30%);
+  border: 2px solid var(--accent-color);
+  border-radius: 20px;
+  color: var(--accent-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.cert-flip-btn.cert-flip-hidden {
+  display: none;
+}
 .cert-lightbox-info {
   padding: 24px;
 }
