@@ -152,10 +152,6 @@
 }
 
 .lightbox-info {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
   padding: 24px;
 }
 
@@ -166,10 +162,33 @@
 }
 
 .lightbox-info p {
-  margin: 0;
+  margin: 0 0 16px 0;
   font-size: 14px;
+  line-height: 1.6;
   color: color-mix(in srgb, var(--default-color), transparent 25%);
-  max-width: 500px;
+}
+
+.lightbox-meta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lightbox-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.lightbox-link:hover {
+  background: var(--accent-color);
+  color: black;
 }
 
 .lightbox-close {
@@ -227,12 +246,6 @@
 
   .filter-btn {
     font-size: 12px;
-  }
-
-  .lightbox-info {
-    flex-direction: column;
-    gap: 14px;
-    padding: 18px;
   }
 
   .lightbox-arrow {
