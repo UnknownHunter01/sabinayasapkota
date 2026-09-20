@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Sabinaya Sapkota</title>
-  
+
   <!--Favicon-->
   <link rel="icon" type="image/png" href="favicon/favicon-96x96.png"/ size="96x96">
   <link rel="shortcut icon" href="favicon/favicon.ico" />
@@ -64,7 +64,7 @@
        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2PR3LW4"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- End Google Tag Manager (noscript) -->
-       
+
         <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
@@ -117,13 +117,13 @@
     </div>
 
     <div class="portfolio-grid">
-      <div class="portfolio-item" data-category="app" data-title="Weather App" data-desc="A clean, data-dense weather and air quality dashboard for iOS." data-link="https://example.com/project-1">
+      <div class="portfolio-item" data-category="app" data-title="Weather App" data-desc="A clean, data-dense weather and air quality dashboard for iOS." data-link="https://example.com/project-1" data-code="https://github.com/sabinaya-sapkota/project-1">
         <span class="portfolio-badge">App 1</span>
         <img src="img/background.png" alt="App project">
         <div class="portfolio-caption"><p>Lorem ipsum, dolor sit amet consectetur</p></div>
       </div>
 
-      <div class="portfolio-item" data-category="product" data-title="Smart Watch" data-desc="Product photography and branding for a wearable tech line." data-link="https://example.com/project-2">
+      <div class="portfolio-item" data-category="product" data-title="Smart Watch" data-desc="Product photography and branding for a wearable tech line." data-link="https://example.com/project-2" data-code="https://github.com/sabinaya-sapkota/project-2">
         <span class="portfolio-badge">Product 1</span>
         <img src="img/background.png" alt="Product project">
         <div class="portfolio-caption"><p>Lorem ipsum, dolor sit amet consectetur</p></div>
@@ -141,7 +141,7 @@
         <div class="portfolio-caption"><p>Lorem ipsum, dolor sit amet consectetur</p></div>
       </div>
 
-      <div class="portfolio-item" data-category="app" data-title="Payment App" data-desc="Mobile payment flow focused on speed and clarity." data-link="https://example.com/project-5">
+      <div class="portfolio-item" data-category="app" data-title="Payment App" data-desc="Mobile payment flow focused on speed and clarity." data-link="https://example.com/project-5" data-code="https://github.com/sabinaya-sapkota/project-5">
         <span class="portfolio-badge">App 2</span>
         <img src="img/background.png" alt="App project">
         <div class="portfolio-caption"><p>Lorem ipsum, dolor sit amet consectetur</p></div>
@@ -166,6 +166,7 @@
         <p id="lightboxDesc"></p>
         <div class="lightbox-meta">
           <a href="#" id="lightboxLink" class="lightbox-link" target="_blank">Link <i class="bi bi-box-arrow-up-right"></i></a>
+          <a href="#" id="lightboxCode" class="lightbox-link" target="_blank">Code <i class="bi bi-code-slash"></i></a>
         </div>
       </div>
     </div>
@@ -201,6 +202,7 @@
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxDesc = document.getElementById('lightboxDesc');
   const lightboxLink = document.getElementById('lightboxLink');
+  const lightboxCode = document.getElementById('lightboxCode');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
@@ -218,6 +220,14 @@
     lightboxTitle.textContent = item.getAttribute('data-title');
     lightboxDesc.textContent = item.getAttribute('data-desc');
     lightboxLink.href = item.getAttribute('data-link');
+
+    const code = item.getAttribute('data-code');
+    if (code) {
+      lightboxCode.href = code;
+      lightboxCode.style.display = 'inline-flex';
+    } else {
+      lightboxCode.style.display = 'none';
+    }
   }
 
   portfolioItems.forEach(item => {

@@ -171,6 +171,7 @@
 .lightbox-meta {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
 }
 
 .lightbox-link {
