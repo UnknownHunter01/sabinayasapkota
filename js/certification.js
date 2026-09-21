@@ -1,7 +1,59 @@
 const certFilterBtns = document.querySelectorAll('.cert-filter-btn');
 const certItems = document.querySelectorAll('.cert-item');
+const certGrid = document.querySelector('.cert-grid');
+const certSortSelect = document.getElementById('certSortSelect');
 let certCurrentIndex = 0;
 let certVisibleItems = Array.from(certItems);
+
+const monthNames = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+
+function parseCertDate(dateStr) {
+  if (!dateStr) return null;
+  const monthYearMatch = dateStr.match(/([A-Za-z]+)\.?\s+(\d{4})/);
+  if (monthYearMatch) {
+    const monthIndex = monthNames.findIndex(m => m.startsWith(monthYearMatch[1].toLowerCase().slice(0, 3)));
+    const year = parseInt(monthYearMatch[2], 10);
+    if (monthIndex !== -1) return new Date(year, monthIndex, 1).getTime();
+    return new Date(year, 0, 1).getTime();
+  }
+  const yearOnlyMatch = dateStr.match(/(\d{4})/);
+  if (yearOnlyMatch) return new Date(parseInt(yearOnlyMatch[1], 10), 0, 1).getTime();
+  return null;
+}
+
+function getOrderedVisibleItems() {
+  return Array.from(certGrid.querySelectorAll('.cert-item')).filter(i => !i.classList.contains('cert-hidden'));
+}
+
+function applySort() {
+  if (!certSortSelect || !certGrid) return;
+  const mode = certSortSelect.value;
+  const items = Array.from(certGrid.querySelectorAll('.cert-item'));
+
+  items.sort((a, b) => {
+    if (mode === 'az') {
+      const titleA = (a.getAttribute('data-title') || '').toLowerCase();
+      const titleB = (b.getAttribute('data-title') || '').toLowerCase();
+      return titleA.localeCompare(titleB);
+    }
+
+    const dateA = parseCertDate(a.getAttribute('data-date'));
+    const dateB = parseCertDate(b.getAttribute('data-date'));
+
+    if (dateA === null && dateB === null) return 0;
+    if (dateA === null) return 1;
+    if (dateB === null) return -1;
+
+    return mode === 'oldest' ? dateA - dateB : dateB - dateA;
+  });
+
+  items.forEach(item => certGrid.appendChild(item));
+  certVisibleItems = getOrderedVisibleItems();
+}
+
+if (certSortSelect) {
+  certSortSelect.addEventListener('change', applySort);
+}
 
 certFilterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -18,7 +70,7 @@ certFilterBtns.forEach(btn => {
       }
     });
 
-    certVisibleItems = Array.from(certItems).filter(i => !i.classList.contains('cert-hidden'));
+    certVisibleItems = getOrderedVisibleItems();
   });
 });
 
@@ -67,6 +119,7 @@ certFlipBtn.addEventListener('click', (e) => {
 });
 
 function openCertLightbox(item) {
+  certVisibleItems = getOrderedVisibleItems();
   certCurrentIndex = certVisibleItems.indexOf(item);
   showCertItem(certVisibleItems[certCurrentIndex]);
   certLightbox.classList.add('cert-active');
@@ -131,3 +184,5 @@ document.querySelectorAll('.cert-protected-img').forEach(img => {
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 });
+
+applySort();

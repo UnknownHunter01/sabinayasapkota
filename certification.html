@@ -64,7 +64,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2PR3LW4"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- End Google Tag Manager (noscript) -->
-       
+
         <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
@@ -108,16 +108,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <h2 class="section-title">Certification</h2>
     <p class="cert-intro">A collection of certifications earned through coursework, training programs, and professional development.</p>
 
-    <div class="cert-filters">
-      <button class="cert-filter-btn active" data-filter="all">All</button>
-      <button class="cert-filter-btn" data-filter="technology">Technology</button>
-      <button class="cert-filter-btn" data-filter="design">Design & Creativity</button>
-      <button class="cert-filter-btn" data-filter="business">Business</button>
-      <button class="cert-filter-btn" data-filter="languages">Languages</button>
-      <button class="cert-filter-btn" data-filter="professional">Professional Skills</button>
-      <button class="cert-filter-btn" data-filter="health">Health & Lifestyle</button>
-      <button class="cert-filter-btn" data-filter="community">Community & Leadership</button>
-      <button class="cert-filter-btn" data-filter="other">Other</button>
+    <div class="cert-controls">
+      <div class="cert-filters">
+        <button class="cert-filter-btn active" data-filter="all">All</button>
+        <button class="cert-filter-btn" data-filter="technology">Technology</button>
+        <button class="cert-filter-btn" data-filter="design">Design & Creativity</button>
+        <button class="cert-filter-btn" data-filter="business">Business</button>
+        <button class="cert-filter-btn" data-filter="languages">Languages</button>
+        <button class="cert-filter-btn" data-filter="professional">Professional Skills</button>
+        <button class="cert-filter-btn" data-filter="health">Health & Lifestyle</button>
+        <button class="cert-filter-btn" data-filter="community">Community & Leadership</button>
+        <button class="cert-filter-btn" data-filter="other">Other</button>
+      </div>
+
+      <select id="certSortSelect" class="cert-sort-select">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="az">Title (A–Z)</option>
+      </select>
     </div>
     <!--
         Technology          → Programming, Web Dev, Cybersecurity, AI, Data Science, Cloud, Networking, Git, DevOps
@@ -165,7 +173,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <img src="img/certificates/XIMUN6.0.jpg" alt="Certificate" class="cert-protected-img">
         <div class="cert-caption"><p>Outstanding Delegate, MUN — Xavier International College</p></div>
       </div>
-      
+
       <div class="cert-item" data-category="business" data-title="Xavier Level Up Expo 2025 — Stall Co-Organizer" data-issuer="Xavier International College" data-desc="Co-organized and ran a gaming stall at the Xavier Level Up Expo 2025 with a partner, handling setup and operations to generate revenue — hands-on experience in small-scale entrepreneurship and event-based business execution." data-date="February 2025">
         <div class="cert-badges">
           <span class="cert-badge">Business</span>
@@ -273,7 +281,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="cert-caption"><p>Blended Learning — World Scouting</p></div>
       </div>
 
-      <div class="cert-item" data-category="languages" data-title="ÖSD A1 German Language Exam" data-issuer="VHS Bhaktapur, Nepal" data-desc="Passed the ÖSD (Österreichisches Sprachdiplom Deutsch) A1 examination, certifying basic proficiency in German language, taken at VHS Bhaktapur, Nepal." data-date="September 2026"  data-img2="img/background.png">
+      <div class="cert-item" data-category="languages" data-title="ÖSD A1 German Language Exam" data-issuer="VHS Bhaktapur, Nepal" data-desc="Passed the ÖSD (Österreichisches Sprachdiplom Deutsch) A1 examination, certifying basic proficiency in German language, taken at VHS Bhaktapur, Nepal." data-date="September 2026">
        <div class="cert-badges">
         <span class="cert-badge">Languages</span>
        </div>
