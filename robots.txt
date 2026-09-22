@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.sabinayasapkota.com.np/sitemap.xmlS
+Sitemap: https://www.sabinayasapkota.com.np/sitemap.xml
